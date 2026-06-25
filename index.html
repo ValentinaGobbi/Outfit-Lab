@@ -448,7 +448,7 @@
         <form id="garment-form" onsubmit="saveGarment(event)" class="space-y-4">
           <input type="hidden" id="form-garment-id">
           
-          <!-- Image Upload with Canvas Square Center Crop Optimization -->
+          <!-- Image Upload with Double Input Support (Camera & Gallery) -->
           <div class="space-y-2">
             <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Foto del capo</label>
             <div class="flex items-center gap-4">
@@ -457,11 +457,20 @@
                 <img id="image-preview" class="w-full h-full object-cover hidden" alt="Preview Capo">
               </div>
               <div class="flex-1 space-y-2">
-                <label class="block text-center border border-gray-200 hover:border-rosegold rounded-xl py-2 px-3 text-xs font-semibold cursor-pointer transition-colors">
-                  Scegli o Scatta Foto
-                  <input type="file" id="garment-image-input" class="hidden" accept="image/*" onchange="previewAndCompressImage(event)">
-                </label>
-                <p class="text-[9px] text-gray-400 leading-normal">La foto verrà ottimizzata e ritagliata automaticamente in un quadrato di lusso.</p>
+                <!-- Sezione a due pulsanti per Fotocamera e Galleria separati -->
+                <div class="grid grid-cols-2 gap-2">
+                  <label class="block text-center border border-gray-200 hover:border-rosegold rounded-xl py-2 px-2 text-[11px] font-semibold cursor-pointer transition-colors flex items-center justify-center gap-1.5 bg-white shadow-sm">
+                    <i data-lucide="image" class="w-3.5 h-3.5 text-gray-500"></i>
+                    Galleria
+                    <input type="file" id="garment-image-gallery" class="hidden" accept="image/*" onchange="previewAndCompressImage(event)">
+                  </label>
+                  <label class="block text-center border border-gray-200 hover:border-rosegold rounded-xl py-2 px-2 text-[11px] font-semibold cursor-pointer transition-colors flex items-center justify-center gap-1.5 bg-white shadow-sm">
+                    <i data-lucide="camera" class="w-3.5 h-3.5 text-rosegold"></i>
+                    Fotocamera
+                    <input type="file" id="garment-image-camera" class="hidden" accept="image/*" capture="environment" onchange="previewAndCompressImage(event)">
+                  </label>
+                </div>
+                <p class="text-[9px] text-gray-400 leading-normal">Usa la fotocamera del telefono per scattare una foto al momento o caricala dalla galleria.</p>
               </div>
             </div>
           </div>
@@ -500,6 +509,8 @@
                 <option value="Giallo">Giallo</option>
                 <option value="Ocra">Ocra</option>
                 <option value="Arancione">Arancione</option>
+                <option value="Oro">Oro</option>
+                <option value="Argento">Argento</option>
               </select>
             </div>
             <div class="space-y-1">
@@ -521,6 +532,8 @@
                 <option value="Giallo">Giallo</option>
                 <option value="Ocra">Ocra</option>
                 <option value="Arancione">Arancione</option>
+                <option value="Oro">Oro</option>
+                <option value="Argento">Argento</option>
               </select>
             </div>
           </div>
@@ -785,7 +798,7 @@
       },
 
       // Nuove regole cromatiche avanzate (Tono su Tono, Complementari, Neutri)
-      NEUTRALS: ['Bianco', 'Nero', 'Grigio', 'Beige', 'Blu', 'Jeans'],
+      NEUTRALS: ['Bianco', 'Nero', 'Grigio', 'Beige', 'Blu', 'Jeans', 'Oro', 'Argento'],
 
       COMPLEMENTARY: {
         'Rosso': ['Verde'],
@@ -1157,11 +1170,13 @@
         'Rosso': '#D92121', 'Verde': '#2E7D32', 'Rosa': '#FFC0CB',
         'Giallo': '#FFEB3B', 'Jeans': '#5A7D9A',
         'Fucsia': '#FF007F', 'Viola': '#800080', 'Ocra': '#DAA520', 'Arancione': '#FF9800',
+        'Oro': '#D4AF37', 'Argento': '#C0C0C0',
         'Nessuno': 'transparent'
       };
       return colors[colorName] || '#E5E5E5';
     }
 
+    // Inizializzazione categorie nei form
     function initFormCategories() {
       const select = document.getElementById('form-category');
       const wishSelect = document.getElementById('wish-category');
@@ -1170,6 +1185,7 @@
       wishSelect.innerHTML = catsHTML;
     }
 
+    // Inizializzazione filtri dropdown
     function initFilterDropdowns() {
       const filterCat = document.getElementById('filter-category');
       filterCat.innerHTML = `<option value="">Tutte le Categorie</option>` + categories.map(cat => `<option value="${cat}">${cat}</option>`).join('');
@@ -1178,7 +1194,7 @@
       filterStyle.innerHTML = `<option value="">Tutti gli Stili</option>` + STYLES.map(st => `<option value="${st}">${st}</option>`).join('');
       
       const filterColor = document.getElementById('filter-color');
-      const colors = ["Nero", "Grigio", "Bianco", "Beige", "Marrone", "Blu", "Jeans", "Verde", "Rosso", "Rosa", "Fucsia", "Viola", "Giallo", "Ocra", "Arancione"];
+      const colors = ["Nero", "Grigio", "Bianco", "Beige", "Marrone", "Blu", "Jeans", "Verde", "Rosso", "Rosa", "Fucsia", "Viola", "Giallo", "Ocra", "Arancione", "Oro", "Argento"];
       filterColor.innerHTML = `<option value="">Tutti i Colori</option>` + colors.map(col => `<option value="${col}">${col}</option>`).join('');
       
       const filterSeason = document.getElementById('filter-season');
@@ -1381,6 +1397,7 @@
       renderSeasonChips();
       
       document.getElementById('modal-add-garment').classList.remove('hidden');
+      lucide.createIcons();
     }
 
     function closeAddModal() {
@@ -1585,6 +1602,7 @@
       renderSeasonChips();
 
       document.getElementById('modal-add-garment').classList.remove('hidden');
+      lucide.createIcons();
     }
 
     // ==========================================

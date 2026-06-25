@@ -85,6 +85,24 @@
     .animate-slide-up {
       animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
+
+    /* Ottimizzazione responsiva della barra di navigazione su schermi molto piccoli (<360px) */
+    @media (max-width: 360px) {
+      .nav-text {
+        font-size: 7px !important;
+        letter-spacing: 0.02em !important;
+        margin-top: 2px !important;
+      }
+      .nav-icon {
+        width: 18px !important;
+        height: 18px !important;
+      }
+      .nav-fab-btn {
+        width: 42px !important;
+        height: 42px !important;
+        top: -16px !important;
+      }
+    }
   </style>
 </head>
 <body class="bg-gray-100 flex justify-center items-stretch h-screen overflow-hidden">
@@ -409,29 +427,31 @@
 
     </main>
 
-    <!-- Navigation Persistent Bottom Bar (Sempre fissa a fondo contenitore) -->
-    <nav class="glass-effect absolute bottom-0 left-0 right-0 z-40 border-t border-gray-100 px-2 py-2 flex justify-around items-center">
-      <button onclick="switchView('dashboard')" id="nav-dashboard" class="flex flex-col items-center justify-center text-rosegold transition-colors py-1 shrink-0 w-16">
-        <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
-        <span class="text-[8px] uppercase tracking-wider font-semibold mt-1">Home</span>
+    <!-- Navigation Persistent Bottom Bar (Sempre fissa a fondo contenitore con struttura Grid fluida e auto-scalabile) -->
+    <nav class="glass-effect absolute bottom-0 left-0 right-0 z-40 border-t border-gray-100 px-1 py-1.5 grid grid-cols-5 items-center justify-items-center">
+      <button onclick="switchView('dashboard')" id="nav-dashboard" class="flex flex-col items-center justify-center text-rosegold transition-colors py-1 w-full min-w-0">
+        <i data-lucide="layout-dashboard" class="w-5 h-5 nav-icon"></i>
+        <span class="text-[8px] uppercase tracking-wider font-semibold mt-1 truncate w-full text-center nav-text">Home</span>
       </button>
-      <button onclick="switchView('wardrobe')" id="nav-wardrobe" class="flex flex-col items-center justify-center text-gray-400 hover:text-rosegold transition-colors py-1 shrink-0 w-16">
-        <i data-lucide="archive" class="w-5 h-5"></i>
-        <span class="text-[8px] uppercase tracking-wider font-semibold mt-1">Armadio</span>
+      <button onclick="switchView('wardrobe')" id="nav-wardrobe" class="flex flex-col items-center justify-center text-gray-400 hover:text-rosegold transition-colors py-1 w-full min-w-0">
+        <i data-lucide="archive" class="w-5 h-5 nav-icon"></i>
+        <span class="text-[8px] uppercase tracking-wider font-semibold mt-1 truncate w-full text-center nav-text">Armadio</span>
       </button>
       
-      <!-- Center Quick FAB -->
-      <button onclick="openAddModal()" class="w-12 h-12 rounded-full bg-fashionBlack hover:bg-rosegold text-white flex items-center justify-center shadow-lg transform -translate-y-2 transition-all fab-shadow shrink-0">
-        <i data-lucide="plus" class="w-6 h-6"></i>
-      </button>
+      <!-- Center Column for Floating Action Button -->
+      <div class="relative flex items-center justify-center w-full h-10">
+        <button onclick="openAddModal()" class="w-11 h-11 rounded-full bg-fashionBlack hover:bg-rosegold text-white flex items-center justify-center shadow-lg absolute -top-5 transform hover:scale-105 transition-all fab-shadow shrink-0 nav-fab-btn">
+          <i data-lucide="plus" class="w-5 h-5"></i>
+        </button>
+      </div>
 
-      <button onclick="switchView('builder')" id="nav-builder" class="flex flex-col items-center justify-center text-gray-400 hover:text-rosegold transition-colors py-1 shrink-0 w-16">
-        <i data-lucide="sparkles" class="w-5 h-5"></i>
-        <span class="text-[8px] uppercase tracking-wider font-semibold mt-1">Builder</span>
+      <button onclick="switchView('builder')" id="nav-builder" class="flex flex-col items-center justify-center text-gray-400 hover:text-rosegold transition-colors py-1 w-full min-w-0">
+        <i data-lucide="sparkles" class="w-5 h-5 nav-icon"></i>
+        <span class="text-[8px] uppercase tracking-wider font-semibold mt-1 truncate w-full text-center nav-text">Builder</span>
       </button>
-      <button onclick="switchView('calendar')" id="nav-calendar" class="flex flex-col items-center justify-center text-gray-400 hover:text-rosegold transition-colors py-1 shrink-0 w-16">
-        <i data-lucide="calendar" class="w-5 h-5"></i>
-        <span class="text-[8px] uppercase tracking-wider font-semibold mt-1">Outfit</span>
+      <button onclick="switchView('calendar')" id="nav-calendar" class="flex flex-col items-center justify-center text-gray-400 hover:text-rosegold transition-colors py-1 w-full min-w-0">
+        <i data-lucide="calendar" class="w-5 h-5 nav-icon"></i>
+        <span class="text-[8px] uppercase tracking-wider font-semibold mt-1 truncate w-full text-center nav-text">Outfit</span>
       </button>
     </nav>
 
@@ -682,6 +702,28 @@
         <p class="text-[10px] text-gray-400 tracking-wider uppercase">Seleziona uno dei tuoi outfit registrati:</p>
         <div id="calendar-picker-list" class="space-y-2">
           <!-- Lista outfit salvati da selezionare -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= MODAL: CUSTOM DIALOG (Alert/Confirm/Prompt) ================= -->
+    <div id="modal-custom-dialog" class="fixed inset-0 bg-black/60 z-[100] flex items-center justify-center p-4 hidden">
+      <div class="bg-white w-full max-w-sm rounded-2xl p-5 space-y-4 animate-slide-up shadow-2xl">
+        <h4 id="dialog-title" class="serif-title text-sm font-bold tracking-wider text-fashionBlack uppercase">Conferma</h4>
+        <p id="dialog-message" class="text-xs text-gray-500 font-light leading-relaxed"></p>
+        
+        <!-- Prompt Input Wrapper -->
+        <div id="dialog-prompt-container" class="hidden">
+          <input type="text" id="dialog-prompt-input" class="w-full bg-fashionGray text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rosegold">
+        </div>
+
+        <div class="flex gap-3 pt-2">
+          <button id="dialog-cancel-btn" onclick="closeCustomDialog(false)" class="flex-1 py-2.5 text-center rounded-xl bg-fashionGray text-gray-600 text-xs font-semibold uppercase tracking-wider">
+            Annulla
+          </button>
+          <button id="dialog-confirm-btn" onclick="closeCustomDialog(true)" class="flex-1 py-2.5 text-center rounded-xl bg-fashionBlack text-white text-xs font-semibold uppercase tracking-wider hover:bg-rosegold transition-colors">
+            Conferma
+          </button>
         </div>
       </div>
     </div>
@@ -977,6 +1019,9 @@
     let calendarDate = new Date();
     let selectedCalendarDay = null;
 
+    // Custom Callback Holder for custom modals (Zero Browser Alerts system)
+    let dialogCallback = null;
+
     window.addEventListener('DOMContentLoaded', () => {
       garments = StorageManager.getGarments();
       categories = StorageManager.getCategories();
@@ -993,6 +1038,54 @@
       
       lucide.createIcons();
     });
+
+    // ==========================================
+    // PREMIUM MODALS SYSTEM (ALERT / CONFIRM / PROMPT)
+    // ==========================================
+    function showCustomConfirm(message, callback) {
+      document.getElementById('dialog-title').innerText = "Conferma";
+      document.getElementById('dialog-message').innerText = message;
+      document.getElementById('dialog-prompt-container').classList.add('hidden');
+      document.getElementById('dialog-cancel-btn').classList.remove('hidden');
+      document.getElementById('modal-custom-dialog').classList.remove('hidden');
+      dialogCallback = callback;
+    }
+
+    function showCustomPrompt(title, placeholder, callback) {
+      document.getElementById('dialog-title').innerText = title;
+      document.getElementById('dialog-message').innerText = "";
+      document.getElementById('dialog-prompt-container').classList.remove('hidden');
+      
+      const input = document.getElementById('dialog-prompt-input');
+      input.value = "";
+      input.placeholder = placeholder;
+      
+      document.getElementById('dialog-cancel-btn').classList.remove('hidden');
+      document.getElementById('modal-custom-dialog').classList.remove('hidden');
+      dialogCallback = callback;
+    }
+
+    function showCustomAlert(title, message) {
+      document.getElementById('dialog-title').innerText = title;
+      document.getElementById('dialog-message').innerText = message;
+      document.getElementById('dialog-prompt-container').classList.add('hidden');
+      document.getElementById('dialog-cancel-btn').classList.add('hidden'); // Nasconde pulsante annulla per Alert normali
+      document.getElementById('modal-custom-dialog').classList.remove('hidden');
+      dialogCallback = () => {};
+    }
+
+    function closeCustomDialog(confirmed) {
+      document.getElementById('modal-custom-dialog').classList.add('hidden');
+      if (dialogCallback) {
+        if (document.getElementById('dialog-prompt-container').classList.contains('hidden')) {
+          dialogCallback(confirmed);
+        } else {
+          const val = document.getElementById('dialog-prompt-input').value;
+          dialogCallback(confirmed ? val : null);
+        }
+      }
+      dialogCallback = null;
+    }
 
     function switchView(viewId) {
       const views = ['dashboard', 'wardrobe', 'builder', 'calendar', 'more'];
@@ -1558,14 +1651,16 @@
     }
 
     function deleteGarment(id) {
-      if (confirm("Sei sicuro di voler eliminare definitivamente questo capo dall'armadio?")) {
-        garments = garments.filter(g => g.id !== id);
-        StorageManager.saveGarments(garments);
-        closeDetailModal();
-        renderWardrobe();
-        updateDashboardStats();
-        showToast("Capo rimosso dall'armadio");
-      }
+      showCustomConfirm("Sei sicuro di voler eliminare definitivamente questo capo dall'armadio?", (confirmed) => {
+        if (confirmed) {
+          garments = garments.filter(g => g.id !== id);
+          StorageManager.saveGarments(garments);
+          closeDetailModal();
+          renderWardrobe();
+          updateDashboardStats();
+          showToast("Capo rimosso dall'armadio");
+        }
+      });
     }
 
     function editGarment(id) {
@@ -1775,24 +1870,25 @@
       const prop = window._currentProposals.find(p => p.id === propId);
       if (!prop) return;
 
-      const outfitName = prompt("Inserisci un nome o un'occasione per questo outfit:");
-      if (outfitName === null) return;
+      showCustomPrompt("Nuovo Outfit", "Inserisci un nome o un'occasione...", (outfitName) => {
+        if (outfitName === null) return;
 
-      const finalName = outfitName.trim() || `Outfit ${prop.style}`;
+        const finalName = outfitName.trim() || `Outfit ${prop.style}`;
 
-      const newOutfit = {
-        id: 'outfit_' + Date.now(),
-        name: finalName,
-        style: prop.style,
-        season: prop.season,
-        itemsIds: prop.items.map(i => i.id)
-      };
+        const newOutfit = {
+          id: 'outfit_' + Date.now(),
+          name: finalName,
+          style: prop.style,
+          season: prop.season,
+          itemsIds: prop.items.map(i => i.id)
+        };
 
-      outfits.push(newOutfit);
-      StorageManager.saveOutfits(outfits);
-      showToast("Outfit salvato nei preferiti!");
-      
-      renderSavedOutfitsList();
+        outfits.push(newOutfit);
+        StorageManager.saveOutfits(outfits);
+        showToast("Outfit salvato nei preferiti!");
+        
+        renderSavedOutfitsList();
+      });
     }
 
     // ==========================================
@@ -1840,18 +1936,20 @@
     }
 
     function deleteOutfit(outId) {
-      if (confirm("Eliminare definitivamente questo outfit?")) {
-        outfits = outfits.filter(o => o.id !== outId);
-        StorageManager.saveOutfits(outfits);
-        
-        for (const [date, id] of Object.entries(calendar)) {
-          if (id === outId) delete calendar[date];
+      showCustomConfirm("Eliminare definitivamente questo outfit?", (confirmed) => {
+        if (confirmed) {
+          outfits = outfits.filter(o => o.id !== outId);
+          StorageManager.saveOutfits(outfits);
+          
+          for (const [date, id] of Object.entries(calendar)) {
+            if (id === outId) delete calendar[date];
+          }
+          StorageManager.saveCalendar(calendar);
+          
+          renderSavedOutfitsList();
+          showToast("Outfit eliminato");
         }
-        StorageManager.saveCalendar(calendar);
-        
-        renderSavedOutfitsList();
-        showToast("Outfit eliminato");
-      }
+      });
     }
 
     // --- CALENDAR GRID ---
@@ -2059,12 +2157,14 @@
     }
 
     function deleteWishlistItem(id) {
-      if (confirm("Rimuovere questo capo dalla wishlist?")) {
-        wishlist = wishlist.filter(w => w.id !== id);
-        StorageManager.saveWishlist(wishlist);
-        renderWishlist();
-        showToast("Rimosso dalla wishlist");
-      }
+      showCustomConfirm("Rimuovere questo capo dalla wishlist?", (confirmed) => {
+        if (confirmed) {
+          wishlist = wishlist.filter(w => w.id !== id);
+          StorageManager.saveWishlist(wishlist);
+          renderWishlist();
+          showToast("Rimosso dalla wishlist");
+        }
+      });
     }
 
     function promoteWishToArmadio(id) {
@@ -2136,15 +2236,17 @@
     }
 
     function deleteCustomCategory(catName) {
-      if (confirm(`Rimuovere la categoria "${catName}"? I capi associati rimarranno nell'armadio.`)) {
-        categories = categories.filter(c => c !== catName);
-        StorageManager.saveCategories(categories);
-        
-        initFormCategories();
-        initFilterDropdowns();
-        renderCustomCategories();
-        showToast("Categoria rimossa");
-      }
+      showCustomConfirm(`Rimuovere la categoria "${catName}"? I capi associati rimarranno nell'armadio.`, (confirmed) => {
+        if (confirmed) {
+          categories = categories.filter(c => c !== catName);
+          StorageManager.saveCategories(categories);
+          
+          initFormCategories();
+          initFilterDropdowns();
+          renderCustomCategories();
+          showToast("Categoria rimossa");
+        }
+      });
     }
 
     // ==========================================

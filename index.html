@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Outfit Lab</title>
-  <!-- Tailwind CSS per styling rapido ed elegante -->
+  <!-- Tailwind CSS per styling premium ed elegante -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons per icone lineari minimaliste e moderne -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -67,7 +67,7 @@
 
     /* Effetto glassmorphism premium */
     .glass-effect {
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
     }
@@ -75,6 +75,15 @@
     /* Floating button premium shadow */
     .fab-shadow {
       box-shadow: 0 8px 24px rgba(212, 155, 143, 0.4);
+    }
+
+    /* Animation per modal slide-up */
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    .animate-slide-up {
+      animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
   </style>
 </head>
@@ -89,10 +98,10 @@
         <h1 class="serif-title text-2xl font-bold tracking-widest text-fashionBlack flex items-center gap-1">
           OUTFIT LAB
         </h1>
-        <p class="text-[10px] uppercase tracking-widest text-gray-400 font-medium">Digital Wardrobe Assistant</p>
+        <p class="text-[10px] uppercase tracking-widest text-gray-400 font-medium">Assistant Guardaroba Digitale</p>
       </div>
       <div class="flex items-center gap-3">
-        <!-- Quick Stats Toggle / Fast Shortcut -->
+        <!-- Quick Stats Toggle -->
         <button id="header-stats-btn" onclick="switchView('dashboard')" class="text-fashionBlack hover:text-rosegold transition-colors">
           <i data-lucide="sparkles" class="w-5 h-5"></i>
         </button>
@@ -114,7 +123,7 @@
           </div>
           <p class="text-[10px] tracking-widest uppercase text-rosegold font-semibold">Benvenuta nel tuo</p>
           <h2 class="serif-title text-xl font-semibold tracking-wider mt-1">Armadio Intelligente</h2>
-          <p class="text-xs text-gray-300 mt-2 font-light">Crea abbinamenti armoniosi, tieni traccia dei tuoi capi e pianifica i tuoi outfit giornalieri.</p>
+          <p class="text-xs text-gray-300 mt-2 font-light">Crea abbinamenti cromatici avanzati, tieni traccia dei tuoi capi e pianifica l'outfit perfetto.</p>
         </div>
 
         <!-- Quick Numerical Stats Grid -->
@@ -154,7 +163,7 @@
           <h3 class="serif-title text-xs font-bold tracking-wider uppercase text-fashionBlack">Statistiche di Stile</h3>
           
           <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm space-y-4">
-            <!-- Categoris Predominanti -->
+            <!-- Categorie Predominanti -->
             <div>
               <p class="text-[10px] uppercase font-semibold text-gray-400 tracking-wider mb-2">Categorie Più Utilizzate</p>
               <div id="chart-categories" class="space-y-2">
@@ -172,7 +181,7 @@
 
             <!-- Colori Predominanti -->
             <div>
-              <p class="text-[10px] uppercase font-semibold text-gray-400 tracking-wider mb-2">Colori Predominanti</p>
+              <p class="text-[10px] uppercase font-semibold text-gray-400 tracking-wider mb-2">Colori Predominanti (Principali e Secondari)</p>
               <div id="chart-colors" class="flex flex-wrap gap-2">
                 <p class="text-xs text-gray-500 italic">Nessun dato registrato</p>
               </div>
@@ -186,7 +195,7 @@
         <!-- Search & Quick Filters -->
         <div class="space-y-2">
           <div class="relative">
-            <input type="text" id="wardrobe-search" placeholder="Cerca nel guardaroba..." class="w-full bg-white text-fashionBlack placeholder-gray-400 text-xs rounded-xl pl-10 pr-4 py-3 border border-gray-100 focus:outline-none focus:border-rosegold shadow-sm transition-all">
+            <input type="text" id="wardrobe-search" placeholder="Cerca nell'armadio..." class="w-full bg-white text-fashionBlack placeholder-gray-400 text-xs rounded-xl pl-10 pr-4 py-3 border border-gray-100 focus:outline-none focus:border-rosegold shadow-sm transition-all">
             <i data-lucide="search" class="absolute left-3 top-3.5 w-4 h-4 text-gray-400"></i>
           </div>
           
@@ -471,32 +480,56 @@
             </select>
           </div>
 
-          <!-- Colori Principale e Secondari -->
+          <!-- Colore Principale e Colore Secondario -->
           <div class="grid grid-cols-2 gap-3">
             <div class="space-y-1">
               <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Colore Principale *</label>
               <select id="form-main-color" required class="w-full bg-fashionGray text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rosegold">
-                <option value="Bianco">Bianco</option>
                 <option value="Nero">Nero</option>
                 <option value="Grigio">Grigio</option>
+                <option value="Bianco">Bianco</option>
                 <option value="Beige">Beige</option>
                 <option value="Marrone">Marrone</option>
                 <option value="Blu">Blu</option>
-                <option value="Rosso">Rosso</option>
+                <option value="Jeans">Jeans</option>
                 <option value="Verde">Verde</option>
+                <option value="Rosso">Rosso</option>
                 <option value="Rosa">Rosa</option>
+                <option value="Fucsia">Fucsia</option>
+                <option value="Viola">Viola</option>
                 <option value="Giallo">Giallo</option>
+                <option value="Ocra">Ocra</option>
+                <option value="Arancione">Arancione</option>
               </select>
             </div>
             <div class="space-y-1">
-              <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Stagione *</label>
-              <select id="form-season" required class="w-full bg-fashionGray text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rosegold">
-                <option value="Primavera">Primavera</option>
-                <option value="Estate">Estate</option>
-                <option value="Autunno">Autunno</option>
-                <option value="Inverno">Inverno</option>
-                <option value="Tutto l'anno">Tutto l'anno</option>
+              <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Colore Secondario</label>
+              <select id="form-secondary-color" class="w-full bg-fashionGray text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rosegold">
+                <option value="Nessuno">Nessuno</option>
+                <option value="Nero">Nero</option>
+                <option value="Grigio">Grigio</option>
+                <option value="Bianco">Bianco</option>
+                <option value="Beige">Beige</option>
+                <option value="Marrone">Marrone</option>
+                <option value="Blu">Blu</option>
+                <option value="Jeans">Jeans</option>
+                <option value="Verde">Verde</option>
+                <option value="Rosso">Rosso</option>
+                <option value="Rosa">Rosa</option>
+                <option value="Fucsia">Fucsia</option>
+                <option value="Viola">Viola</option>
+                <option value="Giallo">Giallo</option>
+                <option value="Ocra">Ocra</option>
+                <option value="Arancione">Arancione</option>
               </select>
+            </div>
+          </div>
+
+          <!-- Stagioni (Selezione Multipla Fino a 2 o "Tutto l'anno") -->
+          <div class="space-y-1">
+            <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Stagione (Seleziona fino a 2 o 'Tutto l'anno') *</label>
+            <div id="form-season-chips" class="flex flex-wrap gap-1.5 pt-1">
+              <!-- Chips stagioni renderizzate dinamicamente -->
             </div>
           </div>
 
@@ -575,7 +608,7 @@
 
         <!-- Selettore rapido categoria -->
         <div class="flex gap-2 overflow-x-auto pb-1">
-          <button onclick="filterSelectorList('')" id="selector-cat-all" class="bg-fashionBlack text-white text-[10px] uppercase font-bold tracking-wider px-3 py-1.5 rounded-lg">Tutti</button>
+          <button onclick="filterSelectorList('')" id="selector-cat-all" class="bg-fashionBlack text-white text-[10px] uppercase font-bold tracking-wider px-3 py-1.5 rounded-lg shrink-0">Tutti</button>
           <!-- Categorie inserite dinamicamente -->
         </div>
 
@@ -603,7 +636,7 @@
           </div>
           <div class="grid grid-cols-2 gap-3">
             <div class="space-y-1">
-              <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Categoria</label>
+              <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Categoria *</label>
               <select id="wish-category" required class="w-full bg-fashionGray text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rosegold">
                 <!-- Categorie -->
               </select>
@@ -647,7 +680,7 @@
 
   </div>
 
-  <!-- JavaScript Modules Logic in single-file container -->
+  <!-- JavaScript Logic Modules -->
   <script>
     // ==========================================
     // MODULE: DATA & DEFINITIONS (data.js)
@@ -665,19 +698,9 @@
       "Vintage", "Rock", "Minimal", "Chic", "Smart Casual", "Boho", "Urban"
     ];
 
-    // Regole di abbinamento colori (facilmente modificabili)
-    const COLOR_HARMONY = {
-      'Nero': ['Bianco', 'Grigio', 'Beige', 'Marrone', 'Blu', 'Rosso', 'Verde', 'Rosa', 'Giallo'],
-      'Bianco': ['Nero', 'Grigio', 'Beige', 'Marrone', 'Blu', 'Rosso', 'Verde', 'Rosa', 'Giallo'],
-      'Grigio': ['Nero', 'Bianco', 'Beige', 'Blu', 'Rosso', 'Rosa'],
-      'Beige': ['Nero', 'Bianco', 'Marrone', 'Verde', 'Rosa', 'Blu'],
-      'Marrone': ['Nero', 'Bianco', 'Beige', 'Verde', 'Blu'],
-      'Blu': ['Bianco', 'Beige', 'Grigio', 'Nero', 'Marrone', 'Rosso'],
-      'Rosso': ['Nero', 'Bianco', 'Grigio', 'Blu'],
-      'Verde': ['Bianco', 'Beige', 'Marrone', 'Nero'],
-      'Rosa': ['Bianco', 'Grigio', 'Nero', 'Beige'],
-      'Giallo': ['Nero', 'Bianco', 'Marrone']
-    };
+    const SEASONS = [
+      "Primavera", "Estate", "Autunno", "Inverno", "Tutto l'anno"
+    ];
 
     // Mappatura compatibilità degli stili
     const STYLE_COMPATIBILITY = {
@@ -695,11 +718,11 @@
       'Urban': ['Urban', 'Streetwear', 'Casual', 'Sportivo', 'Rock']
     };
 
-    // Raggruppamento strutturale delle categorie in macroaree di outfit
+    // Raggruppamento strutturale delle categorie in macroaree
     const MACRO_SLOTS = {
       'UPPER': ["T-shirt", "Polo", "Camicie", "Felpe", "Maglioni", "Cardigan"],
       'LOWER': ["Jeans", "Pantaloni", "Shorts", "Gonne"],
-      'FULL': ["Vestiti"], // Funge sia da sopra che da sotto
+      'FULL': ["Vestiti"],
       'OUTER': ["Giacche", "Cappotti"],
       'SHOES': ["Sneakers", "Scarpe eleganti", "Stivali", "Sandali"],
       'ACCESSORIES': ["Borse", "Cinture", "Cappelli", "Accessori"]
@@ -726,19 +749,26 @@
           console.error("Errore di salvataggio in LocalStorage", e);
         }
       },
-      
-      getGarments() { return this.get('garments', []); },
+      getGarments() { 
+        const list = this.get('garments', []); 
+        // Conversione/migrazione retrocompatibile per le stagioni multiple e colore secondario
+        return list.map(g => {
+          if (!g.seasons) {
+            g.seasons = g.season ? [g.season] : ["Tutto l'anno"];
+          }
+          if (!g.secondaryColor) {
+            g.secondaryColor = 'Nessuno';
+          }
+          return g;
+        });
+      },
       saveGarments(g) { this.set('garments', g); },
-      
       getCategories() { return this.get('categories', DEFAULT_CATEGORIES); },
       saveCategories(c) { this.set('categories', c); },
-      
       getOutfits() { return this.get('outfits', []); },
       saveOutfits(o) { this.set('outfits', o); },
-      
       getCalendar() { return this.get('calendar', {}); },
       saveCalendar(c) { this.set('calendar', c); },
-      
       getWishlist() { return this.get('wishlist', []); },
       saveWishlist(w) { this.set('wishlist', w); }
     };
@@ -747,7 +777,6 @@
     // MODULE: LOCAL OUTFIT ENGINE (outfitEngine.js)
     // ==========================================
     const OutfitEngine = {
-      // Trova la macro-area a cui appartiene una determinata categoria
       getMacroSlot(category) {
         for (const [slot, cats] of Object.entries(MACRO_SLOTS)) {
           if (cats.includes(category)) return slot;
@@ -755,55 +784,127 @@
         return 'ACCESSORIES';
       },
 
-      // Suggerisce una lista di abbinamenti partendo da un capo pilota
+      // Nuove regole cromatiche avanzate (Tono su Tono, Complementari, Neutri)
+      NEUTRALS: ['Bianco', 'Nero', 'Grigio', 'Beige', 'Blu', 'Jeans'],
+
+      COMPLEMENTARY: {
+        'Rosso': ['Verde'],
+        'Verde': ['Rosso'],
+        'Blu': ['Arancione'],
+        'Jeans': ['Arancione'],
+        'Arancione': ['Blu', 'Jeans'],
+        'Giallo': ['Viola'],
+        'Ocra': ['Viola'],
+        'Viola': ['Giallo', 'Ocra']
+      },
+
+      TONO_SU_TONO_FAMILIES: [
+        ['Blu', 'Jeans'],
+        ['Rosa', 'Fucsia'],
+        ['Beige', 'Marrone', 'Ocra'],
+        ['Nero', 'Grigio', 'Bianco']
+      ],
+
+      getColorHarmonyScore(c1, c2) {
+        if (!c1 || !c2 || c1 === 'Nessuno' || c2 === 'Nessuno') return 0;
+        
+        // 1. Tono su Tono - Colore identico
+        if (c1 === c2) return 15;
+        
+        // 2. Tono su Tono - Sfumature appartenenti alla stessa famiglia
+        for (const family of this.TONO_SU_TONO_FAMILIES) {
+          if (family.includes(c1) && family.includes(c2)) return 12;
+        }
+        
+        // 3. Contrasti Complementari
+        if (this.COMPLEMENTARY[c1] && this.COMPLEMENTARY[c1].includes(c2)) return 12;
+        
+        // 4. Colori Neutri (Abbinabili a piacimento come jolly di guardaroba)
+        if (this.NEUTRALS.includes(c1) || this.NEUTRALS.includes(c2)) return 10;
+        
+        // Nessun abbinamento armonioso (clashing di colori)
+        return 0;
+      },
+
       generateSuggestions(pilotItem, targetStyle, targetSeason, allGarments) {
         if (!pilotItem) return [];
         
         const pilotSlot = this.getMacroSlot(pilotItem.category);
         const styleConstraint = targetStyle !== 'Qualsiasi' ? targetStyle : pilotItem.styles?.[0] || 'Casual';
-        const seasonConstraint = targetSeason !== 'Qualsiasi' ? targetSeason : pilotItem.season;
+        const isStrictStyle = targetStyle !== 'Qualsiasi';
+        
+        const pilotSeasons = pilotItem.seasons || [pilotItem.season || "Tutto l'anno"];
+        const seasonConstraint = targetSeason !== 'Qualsiasi' ? targetSeason : pilotSeasons[0];
 
-        // Filtra tutti i capi compatibili eccetto quello pilota
         const candidates = allGarments.filter(item => item.id !== pilotItem.id);
-
-        // Prepariamo i contenitori per i candidati nei vari macro slot
         const slots = { UPPER: [], LOWER: [], OUTER: [], SHOES: [], ACCESSORIES: [] };
         
         candidates.forEach(item => {
           const slot = this.getMacroSlot(item.category);
           if (slots[slot]) {
-            // Calcola punteggio di compatibilità
+            // 1. FILTRO DI STILE RESTRITTIVO
+            if (isStrictStyle && !item.styles.includes(styleConstraint)) {
+              return; 
+            }
+
+            // 2. FILTRO DI ARMONIA CROMATICA AVANZATA (Principale + Secondario)
+            const pMain = pilotItem.mainColor;
+            const pSec = pilotItem.secondaryColor || 'Nessuno';
+            const iMain = item.mainColor;
+            const iSec = item.secondaryColor || 'Nessuno';
+
+            // Calcolo combinazioni incrociate
+            const scoreMainMain = this.getColorHarmonyScore(pMain, iMain);
+            const scoreMainSec = this.getColorHarmonyScore(pMain, iSec);
+            const scoreSecMain = this.getColorHarmonyScore(pSec, iMain);
+            const scoreSecSec = this.getColorHarmonyScore(pSec, iSec);
+
+            // Ottieni il valore cromatico massimo calibrato
+            const maxColorScore = Math.max(
+              scoreMainMain,
+              scoreMainSec * 0.7, // Calibrazione coefficiente secondario
+              scoreSecMain * 0.7, 
+              scoreSecSec * 0.5   
+            );
+
+            // Esclusione categorica se l'abbinamento non rispetta alcun criterio di armonia cromatica
+            if (maxColorScore === 0) {
+              return; 
+            }
+
             let score = 0;
             
-            // 1. Compatibilità Stile
+            // Compatibilità di stile per rilevanza ordinamento
             const compatibleStyles = STYLE_COMPATIBILITY[styleConstraint] || [];
             const itemMatchesStyle = item.styles.some(st => compatibleStyles.includes(st));
             if (itemMatchesStyle) score += 15;
 
-            // 2. Compatibilità Stagione
-            if (item.season === seasonConstraint || item.season === "Tutto l'anno" || seasonConstraint === "Tutto l'anno") {
+            // Compatibilità di stagione
+            const itemSeasons = item.seasons || [item.season || "Tutto l'anno"];
+            const matchesSeasonConstraint = 
+              seasonConstraint === "Tutto l'anno" || 
+              itemSeasons.includes("Tutto l'anno") || 
+              itemSeasons.includes(seasonConstraint) ||
+              pilotSeasons.some(ps => itemSeasons.includes(ps));
+
+            if (matchesSeasonConstraint) {
               score += 10;
             }
 
-            // 3. Compatibilità Colore
-            const allowedColors = COLOR_HARMONY[pilotItem.mainColor] || [];
-            if (allowedColors.includes(item.mainColor) || pilotItem.mainColor === 'Nero' || item.mainColor === 'Nero' || pilotItem.mainColor === 'Bianco' || item.mainColor === 'Bianco') {
-              score += 10;
-            }
-
+            // Somma il punteggio di armocromia calcolato
+            score += maxColorScore;
+            
             item._score = score;
             slots[slot].push(item);
           }
         });
 
-        // Ordina ogni slot per punteggio decrescente
         for (const slot in slots) {
           slots[slot].sort((a, b) => b._score - a._score);
         }
 
         const outcomes = [];
 
-        // Genera 3 diverse proposte combinando gli elementi con punteggio migliore
         for (let step = 0; step < 3; step++) {
           const proposal = {
             id: 'prop_' + Date.now() + '_' + step,
@@ -812,37 +913,30 @@
             season: seasonConstraint
           };
 
-          // Determinazione della struttura dell'outfit a seconda del capo pilota
           if (pilotSlot === 'FULL') {
-            // Vestito intero -> Servono solo Scarpe + Giacca (opzionale) + Accessorio (opzionale)
             if (slots.SHOES[step]) proposal.items.push(slots.SHOES[step]);
             if (slots.OUTER[step]) proposal.items.push(slots.OUTER[step]);
             if (slots.ACCESSORIES[step]) proposal.items.push(slots.ACCESSORIES[step]);
           } else if (pilotSlot === 'UPPER') {
-            // Sopra -> Serve Sotto + Scarpe + Giacca (opzionale) + Accessorio
             if (slots.LOWER[step]) proposal.items.push(slots.LOWER[step]);
             if (slots.SHOES[step]) proposal.items.push(slots.SHOES[step]);
             if (slots.OUTER[step]) proposal.items.push(slots.OUTER[step]);
             if (slots.ACCESSORIES[step]) proposal.items.push(slots.ACCESSORIES[step]);
           } else if (pilotSlot === 'LOWER') {
-            // Sotto -> Serve Sopra + Scarpe + Giacca (opzionale) + Accessorio
             if (slots.UPPER[step]) proposal.items.push(slots.UPPER[step]);
             if (slots.SHOES[step]) proposal.items.push(slots.SHOES[step]);
             if (slots.OUTER[step]) proposal.items.push(slots.OUTER[step]);
             if (slots.ACCESSORIES[step]) proposal.items.push(slots.ACCESSORIES[step]);
           } else if (pilotSlot === 'SHOES') {
-            // Scarpe -> Serve Sopra + Sotto + Accessorio
             if (slots.UPPER[step]) proposal.items.push(slots.UPPER[step]);
             if (slots.LOWER[step]) proposal.items.push(slots.LOWER[step]);
             if (slots.ACCESSORIES[step]) proposal.items.push(slots.ACCESSORIES[step]);
           } else {
-            // Accessorio o Giacca pilota -> Serve Sopra + Sotto + Scarpe
             if (slots.UPPER[step]) proposal.items.push(slots.UPPER[step]);
             if (slots.LOWER[step]) proposal.items.push(slots.LOWER[step]);
             if (slots.SHOES[step]) proposal.items.push(slots.SHOES[step]);
           }
 
-          // Inseriamo la combinazione se ha almeno 2 capi
           if (proposal.items.length >= 2) {
             outcomes.push(proposal);
           }
@@ -862,24 +956,21 @@
     let outfits = [];
     let calendar = {};
     let wishlist = [];
-    let currentStyleSelection = []; // Stili selezionati nel form
-    let selectedPilotItem = null; // Capo pilota per Outfit Builder
-    let activeSelectorCategory = ''; // Filtro categoria per selettore in builder
+    let currentStyleSelection = [];
+    let currentSeasonSelection = [];
+    let selectedPilotItem = null;
+    let activeSelectorCategory = '';
     
-    // Gestione data del calendario
     let calendarDate = new Date();
-    let selectedCalendarDay = null; // Giorno attualmente cliccato nel calendario (formato YYYY-MM-DD)
+    let selectedCalendarDay = null;
 
-    // Inizializzazione Applicazione
     window.addEventListener('DOMContentLoaded', () => {
-      // Carica Dati da Storage
       garments = StorageManager.getGarments();
       categories = StorageManager.getCategories();
       outfits = StorageManager.getOutfits();
       calendar = StorageManager.getCalendar();
       wishlist = StorageManager.getWishlist();
 
-      // Render Iniziale
       initFormCategories();
       initFilterDropdowns();
       updateDashboardStats();
@@ -890,7 +981,6 @@
       lucide.createIcons();
     });
 
-    // Cambia Tab di Visualizzazione Primaria
     function switchView(viewId) {
       const views = ['dashboard', 'wardrobe', 'builder', 'calendar', 'more'];
       views.forEach(v => {
@@ -914,7 +1004,6 @@
       });
       currentView = viewId;
 
-      // Aggiorna specifici rendering entrando nelle view
       if (viewId === 'dashboard') {
         updateDashboardStats();
       } else if (viewId === 'wardrobe') {
@@ -927,7 +1016,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Cambia sub tab nel pannello "I miei Outfit / Calendario"
     function switchSubTab(tabId) {
       currentSubTab = tabId;
       const tOutfits = document.getElementById('subtab-outfits');
@@ -950,7 +1038,6 @@
       }
     }
 
-    // Mostra in-app notification elegante
     function showToast(message) {
       const toast = document.getElementById('app-toast');
       toast.innerText = message;
@@ -962,9 +1049,6 @@
       }, 2500);
     }
 
-    // ==========================================
-    // UI SUBMODULE: DASHBOARD STATISTICS
-    // ==========================================
     function updateDashboardStats() {
       document.getElementById('stat-total').innerText = garments.length;
       
@@ -974,7 +1058,6 @@
       const numAcc = garments.filter(g => MACRO_SLOTS.ACCESSORIES.includes(g.category)).length;
       document.getElementById('stat-accessories').innerText = numAcc;
 
-      // Consiglio del giorno dinamico basato sul primo capo o casuale
       const dailyTipContainer = document.getElementById('dashboard-daily-tip');
       if (garments.length > 0) {
         const randomItem = garments[Math.floor(Math.random() * garments.length)];
@@ -989,7 +1072,7 @@
         dailyTipContainer.innerHTML = "Aggiungi almeno un capo per ricevere suggerimenti automatici dal motore d'abbinamento.";
       }
 
-      // 1. Categorie più utilizzate
+      // Categorie più utilizzate
       const catCount = {};
       garments.forEach(g => catCount[g.category] = (catCount[g.category] || 0) + 1);
       const sortedCats = Object.entries(catCount).sort((a,b) => b[1] - a[1]).slice(0, 3);
@@ -1014,7 +1097,7 @@
         chartCats.innerHTML = `<p class="text-xs text-gray-400 italic">Ancora nessun capo registrato.</p>`;
       }
 
-      // 2. Stili predominanti
+      // Stili predominanti
       const styleCount = {};
       garments.forEach(g => {
         g.styles.forEach(st => styleCount[st] = (styleCount[st] || 0) + 1);
@@ -1041,9 +1124,14 @@
         chartStyles.innerHTML = `<p class="text-xs text-gray-400 italic">Ancora nessun dato.</p>`;
       }
 
-      // 3. Colori predominanti
+      // Colori predominanti (Inclusi i secondari)
       const colorCount = {};
-      garments.forEach(g => colorCount[g.mainColor] = (colorCount[g.mainColor] || 0) + 1);
+      garments.forEach(g => {
+        colorCount[g.mainColor] = (colorCount[g.mainColor] || 0) + 1;
+        if (g.secondaryColor && g.secondaryColor !== 'Nessuno') {
+          colorCount[g.secondaryColor] = (colorCount[g.secondaryColor] || 0) + 0.5; // Peso minore per colore secondario
+        }
+      });
       const sortedColors = Object.entries(colorCount).sort((a,b) => b[1] - a[1]);
       
       const chartColors = document.getElementById('chart-colors');
@@ -1053,7 +1141,7 @@
           const textColor = (col === 'Bianco' || col === 'Giallo' || col === 'Beige') ? 'text-black border border-gray-200' : 'text-white';
           return `
             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold ${textColor}" style="background-color: ${bgCol}">
-              ${col} (${count})
+              ${col} (${Math.round(count)})
             </span>
           `;
         }).join('');
@@ -1062,20 +1150,18 @@
       }
     }
 
-    // Restituisce l'esadecimale associato ad un colore della palette
     function getColorHex(colorName) {
       const colors = {
         'Bianco': '#FFFFFF', 'Nero': '#1A1A1A', 'Grigio': '#8E8E93',
         'Beige': '#F3E5D8', 'Marrone': '#7A5230', 'Blu': '#004080',
         'Rosso': '#D92121', 'Verde': '#2E7D32', 'Rosa': '#FFC0CB',
-        'Giallo': '#FFEB3B'
+        'Giallo': '#FFEB3B', 'Jeans': '#5A7D9A',
+        'Fucsia': '#FF007F', 'Viola': '#800080', 'Ocra': '#DAA520', 'Arancione': '#FF9800',
+        'Nessuno': 'transparent'
       };
       return colors[colorName] || '#E5E5E5';
     }
 
-    // ==========================================
-    // UI SUBMODULE: WARDROBE (CATALOGUE)
-    // ==========================================
     function initFormCategories() {
       const select = document.getElementById('form-category');
       const wishSelect = document.getElementById('wish-category');
@@ -1092,7 +1178,7 @@
       filterStyle.innerHTML = `<option value="">Tutti gli Stili</option>` + STYLES.map(st => `<option value="${st}">${st}</option>`).join('');
       
       const filterColor = document.getElementById('filter-color');
-      const colors = ["Bianco", "Nero", "Grigio", "Beige", "Marrone", "Blu", "Rosso", "Verde", "Rosa", "Giallo"];
+      const colors = ["Nero", "Grigio", "Bianco", "Beige", "Marrone", "Blu", "Jeans", "Verde", "Rosso", "Rosa", "Fucsia", "Viola", "Giallo", "Ocra", "Arancione"];
       filterColor.innerHTML = `<option value="">Tutti i Colori</option>` + colors.map(col => `<option value="${col}">${col}</option>`).join('');
       
       const filterSeason = document.getElementById('filter-season');
@@ -1100,7 +1186,6 @@
       filterSeason.innerHTML = `<option value="">Tutte le Stagioni</option>` + seasons.map(s => `<option value="${s}">${s}</option>`).join('');
     }
 
-    // Rileva filtri e renderizza griglia
     function renderWardrobe() {
       const grid = document.getElementById('wardrobe-grid');
       const emptyState = document.getElementById('wardrobe-empty');
@@ -1115,8 +1200,18 @@
         const matchesQuery = item.name.toLowerCase().includes(query) || (item.brand && item.brand.toLowerCase().includes(query));
         const matchesCat = selCat ? item.category === selCat : true;
         const matchesStyle = selStyle ? item.styles.includes(selStyle) : true;
-        const matchesSeason = selSeason ? item.season === selSeason || item.season === "Tutto l'anno" : true;
-        const matchesColor = selColor ? item.mainColor === selColor : true;
+        
+        // Verifica con stagioni multiple
+        const itemSeasons = item.seasons || [item.season || "Tutto l'anno"];
+        const matchesSeason = selSeason 
+          ? (itemSeasons.includes(selSeason) || itemSeasons.includes("Tutto l'anno")) 
+          : true;
+
+        // Verifica colore principale o secondario
+        const matchesColor = selColor 
+          ? (item.mainColor === selColor || item.secondaryColor === selColor) 
+          : true;
+          
         return matchesQuery && matchesCat && matchesStyle && matchesSeason && matchesColor;
       });
 
@@ -1131,12 +1226,15 @@
                  <span class="text-[9px] uppercase tracking-wider">${item.category}</span>
                </div>`;
           
+          const itemSeasons = item.seasons || [item.season || "Tutto l'anno"];
+          const hasSecColor = item.secondaryColor && item.secondaryColor !== 'Nessuno';
+          
           return `
-            <div onclick="openDetailModal('${item.id}')" class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm active:scale-95 transition-all flex flex-col">
+            <div onclick="openDetailModal('${item.id}')" class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm active:scale-95 transition-all flex flex-col cursor-pointer">
               <div class="aspect-square relative w-full bg-fashionGray">
                 ${imgHTML}
                 <span class="absolute top-2 right-2 text-[8px] bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-full font-bold shadow-sm tracking-wider uppercase text-fashionBlack">
-                  ${item.season}
+                  ${itemSeasons.join(' + ')}
                 </span>
               </div>
               <div class="p-3 flex-1 flex flex-col justify-between">
@@ -1145,7 +1243,10 @@
                   <h4 class="text-xs font-semibold text-fashionBlack mt-0.5 truncate">${item.name}</h4>
                 </div>
                 <div class="flex justify-between items-center mt-2 pt-2 border-t border-gray-50">
-                  <span class="inline-block w-3.5 h-3.5 rounded-full border border-gray-300" style="background-color: ${getColorHex(item.mainColor)}"></span>
+                  <div class="flex gap-1">
+                    <span class="inline-block w-3.5 h-3.5 rounded-full border border-gray-300" style="background-color: ${getColorHex(item.mainColor)}" title="Principale: ${item.mainColor}"></span>
+                    ${hasSecColor ? `<span class="inline-block w-3.5 h-3.5 rounded-full border border-gray-300" style="background-color: ${getColorHex(item.secondaryColor)}" title="Secondario: ${item.secondaryColor}"></span>` : ''}
+                  </div>
                   <span class="text-[9px] text-gray-400 font-light truncate max-w-[80px]">${item.brand || 'No Brand'}</span>
                 </div>
               </div>
@@ -1163,7 +1264,6 @@
       renderWardrobe();
     }
 
-    // Auto-applicatore ricerca istantanea
     document.getElementById('wardrobe-search').addEventListener('input', () => {
       renderWardrobe();
     });
@@ -1180,23 +1280,19 @@
         const img = new Image();
         img.onload = function() {
           const canvas = document.createElement('canvas');
-          const maxDim = 320; // 320x320 px quadrato (Ottimizzato per LocalStorage risparmiando KB)
+          const maxDim = 320; 
           canvas.width = maxDim;
           canvas.height = maxDim;
           
           const ctx = canvas.getContext('2d');
           
-          // Ritaglio quadrato centrato elegante
           const side = Math.min(img.width, img.height);
           const sx = (img.width - side) / 2;
           const sy = (img.height - side) / 2;
           
           ctx.drawImage(img, sx, sy, side, side, 0, 0, maxDim, maxDim);
-          
-          // Compressione JPEG alta efficienza (0.75 qualità)
           const compressedBase64 = canvas.toDataURL('image/jpeg', 0.75);
           
-          // Mostra preview
           const preview = document.getElementById('image-preview');
           preview.src = compressedBase64;
           preview.classList.remove('hidden');
@@ -1208,28 +1304,44 @@
     }
 
     // ==========================================
+    // UI SUBMODULE: STAGIONI & STILE CHIPS
+    // ==========================================
+    function renderSeasonChips() {
+      const container = document.getElementById('form-season-chips');
+      container.innerHTML = SEASONS.map(s => {
+        const active = currentSeasonSelection.includes(s);
+        const css = active 
+          ? "bg-rosegold text-white border-rosegold" 
+          : "bg-fashionGray text-gray-500 border-gray-200";
+        return `
+          <button type="button" onclick="toggleSeasonForm('${s}')" class="text-[10px] font-medium px-2.5 py-1 rounded-full border transition-all ${css}">
+            ${s}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function toggleSeasonForm(seasonName) {
+      if (seasonName === "Tutto l'anno") {
+        currentSeasonSelection = ["Tutto l'anno"];
+      } else {
+        currentSeasonSelection = currentSeasonSelection.filter(s => s !== "Tutto l'anno");
+        
+        if (currentSeasonSelection.includes(seasonName)) {
+          currentSeasonSelection = currentSeasonSelection.filter(s => s !== seasonName);
+        } else {
+          if (currentSeasonSelection.length >= 2) {
+            currentSeasonSelection.shift(); // Max 2 stagioni contemporaneamente
+          }
+          currentSeasonSelection.push(seasonName);
+        }
+      }
+      renderSeasonChips();
+    }
+
+    // ==========================================
     // UI SUBMODULE: ADD / EDIT DIALOG
     // ==========================================
-    function openAddModal() {
-      document.getElementById('modal-title').innerText = "Aggiungi Capo";
-      document.getElementById('garment-form').reset();
-      document.getElementById('form-garment-id').value = "";
-      
-      // Resetta preview foto
-      document.getElementById('image-preview').classList.add('hidden');
-      document.getElementById('image-preview').removeAttribute('src');
-      document.getElementById('image-placeholder-icon').classList.remove('hidden');
-      
-      currentStyleSelection = [];
-      renderStyleChips();
-      
-      document.getElementById('modal-add-garment').classList.remove('hidden');
-    }
-
-    function closeAddModal() {
-      document.getElementById('modal-add-garment').classList.add('hidden');
-    }
-
     function renderStyleChips() {
       const container = document.getElementById('form-style-chips');
       container.innerHTML = STYLES.map(st => {
@@ -1254,7 +1366,27 @@
       renderStyleChips();
     }
 
-    // Salvataggio capo inserito / modificato
+    function openAddModal() {
+      document.getElementById('modal-title').innerText = "Aggiungi Capo";
+      document.getElementById('garment-form').reset();
+      document.getElementById('form-garment-id').value = "";
+      
+      document.getElementById('image-preview').classList.add('hidden');
+      document.getElementById('image-preview').removeAttribute('src');
+      document.getElementById('image-placeholder-icon').classList.remove('hidden');
+      
+      currentStyleSelection = [];
+      currentSeasonSelection = ["Tutto l'anno"];
+      renderStyleChips();
+      renderSeasonChips();
+      
+      document.getElementById('modal-add-garment').classList.remove('hidden');
+    }
+
+    function closeAddModal() {
+      document.getElementById('modal-add-garment').classList.add('hidden');
+    }
+
     function saveGarment(event) {
       event.preventDefault();
 
@@ -1262,7 +1394,7 @@
       const name = document.getElementById('form-name').value;
       const category = document.getElementById('form-category').value;
       const mainColor = document.getElementById('form-main-color').value;
-      const season = document.getElementById('form-season').value;
+      const secondaryColor = document.getElementById('form-secondary-color').value;
       const brand = document.getElementById('form-brand').value;
       const material = document.getElementById('form-material').value;
       const size = document.getElementById('form-size').value;
@@ -1271,26 +1403,29 @@
       const imageSrc = document.getElementById('image-preview').getAttribute('src') || '';
 
       if (currentStyleSelection.length === 0) {
-        currentStyleSelection.push("Casual"); // Default di sicurezza
+        currentStyleSelection.push("Casual");
+      }
+      if (currentSeasonSelection.length === 0) {
+        currentSeasonSelection.push("Tutto l'anno");
       }
 
       if (id) {
-        // Modifica esistente
         const index = garments.findIndex(g => g.id === id);
         if (index !== -1) {
           garments[index] = {
-            id, name, category, mainColor, season, brand, material, size, model, notes,
+            id, name, category, mainColor, secondaryColor, brand, material, size, model, notes,
             styles: currentStyleSelection,
+            seasons: currentSeasonSelection,
             image: imageSrc || garments[index].image
           };
           showToast("Capo aggiornato con successo");
         }
       } else {
-        // Nuovo Inserimento
         const newGarment = {
           id: 'item_' + Date.now(),
-          name, category, mainColor, season, brand, material, size, model, notes,
+          name, category, mainColor, secondaryColor, brand, material, size, model, notes,
           styles: currentStyleSelection,
+          seasons: currentSeasonSelection,
           image: imageSrc
         };
         garments.push(newGarment);
@@ -1318,12 +1453,15 @@
              <span class="text-xs uppercase tracking-widest font-semibold">${item.category}</span>
            </div>`;
 
+      const itemSeasons = item.seasons || [item.season || "Tutto l'anno"];
+      const hasSecColor = item.secondaryColor && item.secondaryColor !== 'Nessuno';
+
       container.innerHTML = `
         <div class="space-y-4">
           <div class="relative">
             ${imgHTML}
             <span class="absolute bottom-3 right-3 text-[10px] bg-fashionBlack/90 text-white px-3 py-1 rounded-full font-bold shadow-sm tracking-wider uppercase">
-              ${item.season}
+              ${itemSeasons.join(' + ')}
             </span>
           </div>
 
@@ -1335,9 +1473,18 @@
           <div class="grid grid-cols-2 gap-3 text-xs border-y border-gray-100 py-3">
             <div>
               <p class="text-[9px] uppercase tracking-wider text-gray-400 font-bold">Colore Principale</p>
-              <p class="font-medium mt-0.5 flex items-center gap-1.5">
-                <span class="inline-block w-3 h-3 rounded-full border border-gray-300" style="background-color: ${getColorHex(item.mainColor)}"></span>
+              <p class="font-medium mt-0.5 flex items-center gap-1.5 font-semibold">
+                <span class="inline-block w-3 h-3 rounded-full border border-gray-300 shadow-sm" style="background-color: ${getColorHex(item.mainColor)}"></span>
                 ${item.mainColor}
+              </p>
+            </div>
+            <div>
+              <p class="text-[9px] uppercase tracking-wider text-gray-400 font-bold">Colore Secondario</p>
+              <p class="font-medium mt-0.5 flex items-center gap-1.5">
+                ${hasSecColor ? `
+                  <span class="inline-block w-3 h-3 rounded-full border border-gray-300 shadow-sm" style="background-color: ${getColorHex(item.secondaryColor)}"></span>
+                  ${item.secondaryColor}
+                ` : '<span class="text-gray-400 italic">Nessuno</span>'}
               </p>
             </div>
             <div>
@@ -1351,6 +1498,10 @@
             <div>
               <p class="text-[9px] uppercase tracking-wider text-gray-400 font-bold">Taglia</p>
               <p class="font-medium mt-0.5">${item.size || 'Non specificata'}</p>
+            </div>
+            <div>
+              <p class="text-[9px] uppercase tracking-wider text-gray-400 font-bold">Modello</p>
+              <p class="font-medium mt-0.5">${item.model || 'Standard'}</p>
             </div>
           </div>
 
@@ -1371,7 +1522,7 @@
           <!-- Bottoni di gestione -->
           <div class="flex gap-3 pt-2">
             <button onclick="deleteGarment('${item.id}')" class="flex-1 py-3 bg-red-50 hover:bg-red-100 text-red-500 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors">
-              Elimina Capo
+              Elimina
             </button>
             <button onclick="editGarment('${item.id}')" class="flex-1 py-3 bg-fashionBlack text-white rounded-xl text-xs font-semibold uppercase tracking-wider hover:bg-rosegold transition-colors">
               Modifica
@@ -1410,7 +1561,7 @@
       document.getElementById('form-name').value = item.name;
       document.getElementById('form-category').value = item.category;
       document.getElementById('form-main-color').value = item.mainColor;
-      document.getElementById('form-season').value = item.season;
+      document.getElementById('form-secondary-color').value = item.secondaryColor || 'Nessuno';
       document.getElementById('form-brand').value = item.brand || '';
       document.getElementById('form-material').value = item.material || '';
       document.getElementById('form-size').value = item.size || '';
@@ -1428,7 +1579,10 @@
       }
 
       currentStyleSelection = [...item.styles];
+      currentSeasonSelection = item.seasons ? [...item.seasons] : [item.season || "Tutto l'anno"];
+      
       renderStyleChips();
+      renderSeasonChips();
 
       document.getElementById('modal-add-garment').classList.remove('hidden');
     }
@@ -1437,7 +1591,6 @@
     // UI SUBMODULE: OUTFIT BUILDER WIDGET
     // ==========================================
     function openGarmentSelector() {
-      // Inserisce categorie dinamicamente
       const catSelectorHeader = document.getElementById('modal-selector-garment').querySelector('.flex.gap-2');
       catSelectorHeader.innerHTML = `
         <button onclick="filterSelectorList('')" id="selector-cat-all" class="text-[10px] uppercase font-bold tracking-wider px-3 py-1.5 rounded-lg border border-fashionBlack bg-fashionBlack text-white">
@@ -1457,11 +1610,9 @@
       document.getElementById('modal-selector-garment').classList.add('hidden');
     }
 
-    // Filtra la lista di selezione per l'Outfit Builder
     function filterSelectorList(catName) {
       activeSelectorCategory = catName;
 
-      // Aggiorna gli stili dei bottoni
       const buttons = document.getElementById('modal-selector-garment').querySelectorAll('.flex.gap-2 button');
       buttons.forEach(btn => {
         btn.className = "text-[10px] uppercase font-bold tracking-wider px-3 py-1.5 rounded-lg border border-gray-200 text-gray-500 shrink-0";
@@ -1472,7 +1623,6 @@
         activeBtn.className = "text-[10px] uppercase font-bold tracking-wider px-3 py-1.5 rounded-lg border border-fashionBlack bg-fashionBlack text-white shrink-0";
       }
 
-      // Renderizza capi filtrati
       const filtered = garments.filter(g => catName ? g.category === catName : true);
       const container = document.getElementById('selector-garments-list');
 
@@ -1490,11 +1640,10 @@
         `).join('');
         lucide.createIcons();
       } else {
-        container.innerHTML = `<div class="col-span-2 text-center py-6 text-xs text-gray-400">Nessun capo trovato per questa categoria.</div>`;
+        container.innerHTML = `<div class="col-span-2 text-center py-6 text-xs text-gray-400">Nessun capo trovato.</div>`;
       }
     }
 
-    // Seleziona il capo pilota e aggiorna l'interfaccia dell'Outfit Builder
     function selectPilotItem(id) {
       const item = garments.find(g => g.id === id);
       if (!item) return;
@@ -1506,6 +1655,10 @@
         ? `<img src="${item.image}" class="w-12 h-12 rounded-lg object-cover">`
         : `<div class="w-12 h-12 rounded-lg bg-fashionBeige flex items-center justify-center text-rosegold"><i data-lucide="shirt" class="w-5 h-5"></i></div>`;
 
+      const itemSeasons = item.seasons || [item.season || "Tutto l'anno"];
+      const hasSecColor = item.secondaryColor && item.secondaryColor !== 'Nessuno';
+      const colorDisplay = hasSecColor ? `${item.mainColor} + ${item.secondaryColor}` : item.mainColor;
+
       preview.innerHTML = `
         <div class="flex items-center justify-between w-full">
           <div class="flex items-center gap-3">
@@ -1513,7 +1666,7 @@
             <div class="text-left">
               <span class="text-[8px] uppercase font-bold tracking-wider text-rosegold">${item.category}</span>
               <h4 class="text-xs font-bold text-fashionBlack">${item.name}</h4>
-              <p class="text-[9px] text-gray-400 font-light">${item.mainColor} • ${item.season}</p>
+              <p class="text-[9px] text-gray-400 font-light">${colorDisplay} • ${itemSeasons.join(' + ')}</p>
             </div>
           </div>
           <span class="text-[10px] text-rosegold font-bold uppercase tracking-wider">Modifica</span>
@@ -1524,7 +1677,6 @@
       lucide.createIcons();
     }
 
-    // Generazione outfit consigliati
     function generateOutfits() {
       if (!selectedPilotItem) {
         showToast("Seleziona prima un capo di partenza!");
@@ -1539,20 +1691,24 @@
 
       if (proposals.length > 0) {
         container.innerHTML = `
-          <h4 class="serif-title text-xs font-bold tracking-widest text-fashionBlack uppercase mt-4 mb-2">Abbinamenti Suggeriti</h4>
+          <h4 class="serif-title text-xs font-bold tracking-widest text-fashionBlack uppercase mt-4 mb-2">Abbinamenti Ottimizzati</h4>
           <div class="space-y-4">
             ${proposals.map((prop, idx) => {
               const itemsListHTML = prop.items.map(item => {
                 const imgHTML = item.image 
                   ? `<img src="${item.image}" class="w-12 h-12 rounded-lg object-cover">`
                   : `<div class="w-12 h-12 rounded-lg bg-fashionBeige flex items-center justify-center text-rosegold"><i data-lucide="shirt" class="w-5 h-5"></i></div>`;
+                
+                const hasSecColor = item.secondaryColor && item.secondaryColor !== 'Nessuno';
+                const colLabel = hasSecColor ? `${item.mainColor} + ${item.secondaryColor}` : item.mainColor;
+                
                 return `
                   <div class="flex items-center gap-3 bg-white p-2 rounded-xl border border-gray-100 shadow-sm">
                     ${imgHTML}
                     <div class="text-left overflow-hidden">
                       <p class="text-[8px] uppercase font-bold tracking-wider text-rosegold">${item.category}</p>
                       <h5 class="text-xs font-bold text-fashionBlack truncate">${item.name}</h5>
-                      <p class="text-[9px] text-gray-400 font-light">${item.mainColor} • ${item.brand || 'No brand'}</p>
+                      <p class="text-[9px] text-gray-400 font-light">${colLabel} • ${item.brand || 'Generico'}</p>
                     </div>
                   </div>
                 `;
@@ -1565,7 +1721,7 @@
               return `
                 <div class="bg-fashionGray p-4 rounded-2xl border border-gray-200 space-y-3">
                   <div class="flex justify-between items-center">
-                    <span class="text-xs font-bold serif-title text-fashionBlack tracking-wider">Proposta ${idx + 1}</span>
+                    <span class="text-xs font-bold serif-title text-fashionBlack tracking-wider">Opzione ${idx + 1}</span>
                     <span class="text-[9px] font-bold bg-white text-rosegold px-2 py-0.5 rounded-full border border-rosegold/20">${prop.style}</span>
                   </div>
                   
@@ -1582,28 +1738,26 @@
           </div>
         `;
         
-        // Mantieni in memoria temporanea le proposte per il salvataggio
         window._currentProposals = proposals;
         lucide.createIcons();
       } else {
         container.innerHTML = `
           <div class="text-center py-8 space-y-2">
             <i data-lucide="frown" class="w-8 h-8 text-gray-300 mx-auto"></i>
-            <p class="text-xs text-gray-500 font-light">Nessuna proposta trovata. Prova ad aggiungere più tipologie di capi per creare combinazioni.</p>
+            <p class="text-xs text-gray-500 font-light">Nessun abbinamento armonioso trovato con le opzioni attuali. Prova a cambiare i criteri o ad aggiungere capi di colori neutri nell'armadio.</p>
           </div>
         `;
         lucide.createIcons();
       }
     }
 
-    // Salva l'outfit creato
     function saveOutfit(propId) {
       if (!window._currentProposals) return;
       const prop = window._currentProposals.find(p => p.id === propId);
       if (!prop) return;
 
-      const outfitName = prompt("Inserisci un nome o un'occasione per questo outfit (es. Aperitivo con amici, Lavoro):");
-      if (outfitName === null) return; // annullato
+      const outfitName = prompt("Inserisci un nome o un'occasione per questo outfit:");
+      if (outfitName === null) return;
 
       const finalName = outfitName.trim() || `Outfit ${prop.style}`;
 
@@ -1617,7 +1771,7 @@
 
       outfits.push(newOutfit);
       StorageManager.saveOutfits(outfits);
-      showToast("Outfit salvato con successo!");
+      showToast("Outfit salvato nei preferiti!");
       
       renderSavedOutfitsList();
     }
@@ -1632,7 +1786,6 @@
       if (outfits.length > 0) {
         emptyState.classList.add('hidden');
         container.innerHTML = outfits.map(out => {
-          // Risali ai veri capi registrati
           const realItems = out.itemsIds.map(id => garments.find(g => g.id === id)).filter(Boolean);
           
           const imagesRow = realItems.map(item => {
@@ -1668,11 +1821,10 @@
     }
 
     function deleteOutfit(outId) {
-      if (confirm("Eliminare definitivamente questo outfit dai preferiti?")) {
+      if (confirm("Eliminare definitivamente questo outfit?")) {
         outfits = outfits.filter(o => o.id !== outId);
         StorageManager.saveOutfits(outfits);
         
-        // Rimuovi anche riferimenti nel calendario
         for (const [date, id] of Object.entries(calendar)) {
           if (id === outId) delete calendar[date];
         }
@@ -1683,7 +1835,7 @@
       }
     }
 
-    // --- CALENDAR LOGIC ---
+    // --- CALENDAR GRID ---
     const MONTH_NAMES = [
       "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
       "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
@@ -1700,21 +1852,17 @@
       
       document.getElementById('calendar-month-year').innerText = `${MONTH_NAMES[month]} ${year}`;
 
-      // Calcola primo giorno e quanti giorni in questo mese
-      const firstDayIndex = new Date(year, month, 1).getDay(); // 0 è Domenica
-      // Adatta indice per settimana lunedì-domenica
+      const firstDayIndex = new Date(year, month, 1).getDay();
       const adjustedFirstDay = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
       const numDays = new Date(year, month + 1, 0).getDate();
 
       const daysContainer = document.getElementById('calendar-days');
       daysContainer.innerHTML = '';
 
-      // Spazi vuoti per offset di inizio mese
       for (let i = 0; i < adjustedFirstDay; i++) {
         daysContainer.innerHTML += `<div class="aspect-square"></div>`;
       }
 
-      // Giorni reali del mese
       for (let d = 1; d <= numDays; d++) {
         const dStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
         const hasOutfit = !!calendar[dStr];
@@ -1732,7 +1880,6 @@
       }
     }
 
-    // Seleziona giorno sul calendario
     function selectCalendarDay(dateStr) {
       selectedCalendarDay = dateStr;
       
@@ -1775,7 +1922,6 @@
         }
       }
 
-      // Se non c'è nessun outfit pianificato per questo giorno
       viewContainer.innerHTML = `
         <button onclick="openCalendarOutfitPicker()" class="w-full text-center py-3 border border-dashed border-gray-300 hover:border-rosegold rounded-xl text-xs text-gray-500 font-medium transition-colors flex items-center justify-center gap-2">
           <i data-lucide="calendar-plus" class="w-4 h-4 text-rosegold"></i> Pianifica Outfit per questa data
@@ -1790,13 +1936,13 @@
         StorageManager.saveCalendar(calendar);
         renderCalendar();
         selectCalendarDay(selectedCalendarDay);
-        showToast("Outfit rimosso dal calendario");
+        showToast("Outfit rimosso dal giorno");
       }
     }
 
     function openCalendarOutfitPicker() {
       if (outfits.length === 0) {
-        showToast("Salva prima almeno un outfit nei preferiti per poterlo pianificare!");
+        showToast("Salva prima almeno un outfit nei preferiti!");
         return;
       }
 
@@ -1825,7 +1971,7 @@
       closeCalendarOutfitPicker();
       renderCalendar();
       selectCalendarDay(selectedCalendarDay);
-      showToast("Outfit pianificato correttamente");
+      showToast("Pianificazione salvata");
     }
 
     // ==========================================
@@ -1890,7 +2036,7 @@
       StorageManager.saveWishlist(wishlist);
       closeWishlistModal();
       renderWishlist();
-      showToast("Desiderio salvato");
+      showToast("Aggiunto in wishlist");
     }
 
     function deleteWishlistItem(id) {
@@ -1902,38 +2048,36 @@
       }
     }
 
-    // Promuove capo desiderato in un capo vero nell'armadio
     function promoteWishToArmadio(id) {
       const wish = wishlist.find(w => w.id === id);
       if (!wish) return;
 
-      // Crea l'oggetto capo
       const newGarment = {
         id: 'item_' + Date.now(),
         name: wish.name,
         category: wish.category,
-        mainColor: 'Bianco', // Colore di default
-        season: "Tutto l'anno",
+        mainColor: 'Bianco',
+        secondaryColor: 'Nessuno',
         brand: '',
         material: '',
         size: '',
         model: '',
         notes: wish.notes || 'Promosso da wishlist',
         styles: ["Casual"],
+        seasons: ["Tutto l'anno"],
         image: ''
       };
 
       garments.push(newGarment);
       StorageManager.saveGarments(garments);
       
-      // Rimuovi da wishlist
       wishlist = wishlist.filter(w => w.id !== id);
       StorageManager.saveWishlist(wishlist);
 
       renderWishlist();
       renderWardrobe();
       updateDashboardStats();
-      showToast("Capo promosso e aggiunto al tuo guardaroba!");
+      showToast("Capo trasferito nel guardaroba reale!");
     }
 
     // ==========================================
@@ -1969,11 +2113,11 @@
       initFormCategories();
       initFilterDropdowns();
       renderCustomCategories();
-      showToast("Categoria personalizzata aggiunta!");
+      showToast("Nuova categoria creata!");
     }
 
     function deleteCustomCategory(catName) {
-      if (confirm(`Rimuovere la categoria "${catName}"? I capi appartenenti a questa categoria rimarranno intatti.`)) {
+      if (confirm(`Rimuovere la categoria "${catName}"? I capi associati rimarranno nell'armadio.`)) {
         categories = categories.filter(c => c !== catName);
         StorageManager.saveCategories(categories);
         
@@ -1985,7 +2129,7 @@
     }
 
     // ==========================================
-    // MODULE: BACKUP MANAGEMENT
+    // MODULE: BACKUP MANAGEMENT (JSON)
     // ==========================================
     function exportData() {
       const data = {
@@ -2003,7 +2147,7 @@
       document.body.appendChild(downloadAnchor);
       downloadAnchor.click();
       downloadAnchor.remove();
-      showToast("Backup esportato scaricato con successo");
+      showToast("File di backup scaricato con successo");
     }
 
     function importData(event) {
@@ -2021,14 +2165,12 @@
           if (parsed.calendar) StorageManager.saveCalendar(parsed.calendar);
           if (parsed.wishlist) StorageManager.saveWishlist(parsed.wishlist);
 
-          // Ricarica variabili globali applicative
           garments = StorageManager.getGarments();
           categories = StorageManager.getCategories();
           outfits = StorageManager.getOutfits();
           calendar = StorageManager.getCalendar();
           wishlist = StorageManager.getWishlist();
 
-          // Aggiorna l'interfaccia corrente
           initFormCategories();
           initFilterDropdowns();
           updateDashboardStats();
@@ -2036,10 +2178,10 @@
           renderWishlist();
           renderCustomCategories();
 
-          showToast("Ripristino armadio completato con successo!");
+          showToast("Ripristino dati completato correttamente!");
           switchView('dashboard');
         } catch (err) {
-          showToast("Errore durante la lettura del file di backup.");
+          showToast("Formato file di backup non valido.");
           console.error(err);
         }
       };

@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Outfit Lab</title>
   <!-- Tailwind CSS per styling premium ed elegante -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -98,19 +98,19 @@
         height: 18px !important;
       }
       .nav-fab-btn {
-        width: 42px !important;
-        height: 42px !important;
-        top: -16px !important;
+        width: 40px !important;
+        height: 40px !important;
+        top: -14px !important;
       }
     }
   </style>
 </head>
-<body class="bg-gray-100 flex justify-center items-stretch h-screen overflow-hidden">
+<body class="bg-gray-100 flex justify-center items-start min-h-[100dvh]">
 
-  <!-- Main Standalone Mobile Shell (Altezza fissa dello schermo per bloccare la navigazione in basso) -->
-  <div class="w-full max-w-md bg-[#FAF9F6] flex flex-col relative shadow-2xl overflow-hidden h-screen max-h-screen border-x border-gray-100">
+  <!-- Main Standalone Mobile Shell (Altezza dinamica con scorrimento nativo per abilitare pull-to-refresh) -->
+  <div class="w-full max-w-md bg-[#FAF9F6] flex flex-col relative shadow-2xl border-x border-gray-100 min-h-[100dvh] pb-28">
     
-    <!-- Top Premium Header -->
+    <!-- Top Premium Header (Sticky per rimanere sempre in alto durante lo scorrimento nativo) -->
     <header class="glass-effect sticky top-0 z-40 border-b border-gray-100 px-6 py-4 flex justify-between items-center">
       <div>
         <h1 class="serif-title text-2xl font-bold tracking-widest text-fashionBlack flex items-center gap-1">
@@ -129,8 +129,8 @@
       </div>
     </header>
 
-    <!-- Main Dynamic Content Container (Contenuto scorrevole con padding inferiore di sicurezza) -->
-    <main id="app-container" class="flex-1 overflow-y-auto px-4 py-4 pb-24">
+    <!-- Main Dynamic Content Container (Scorre nativamente con il body) -->
+    <main id="app-container" class="flex-1 px-4 py-4">
       
       <!-- ================= VIEW 1: DASHBOARD ================= -->
       <section id="view-dashboard" class="view-transition space-y-6">
@@ -427,8 +427,8 @@
 
     </main>
 
-    <!-- Navigation Persistent Bottom Bar (Sempre fissa a fondo contenitore con struttura Grid fluida e auto-scalabile) -->
-    <nav class="glass-effect absolute bottom-0 left-0 right-0 z-40 border-t border-gray-100 px-1 py-1.5 grid grid-cols-5 items-center justify-items-center">
+    <!-- Navigation Bottom Bar (Fissata al fondo dello schermo intero e compatibile con Safe Areas di iOS/Android) -->
+    <nav class="glass-effect fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md z-40 border-t border-gray-100 px-1 pt-1.5 pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))] grid grid-cols-5 items-center justify-items-center shadow-lg">
       <button onclick="switchView('dashboard')" id="nav-dashboard" class="flex flex-col items-center justify-center text-rosegold transition-colors py-1 w-full min-w-0">
         <i data-lucide="layout-dashboard" class="w-5 h-5 nav-icon"></i>
         <span class="text-[8px] uppercase tracking-wider font-semibold mt-1 truncate w-full text-center nav-text">Home</span>
@@ -1051,6 +1051,7 @@
       dialogCallback = callback;
     }
 
+    // Centra l'inquadratura dello schermo quando si aprono i prompt per non far nascondere i campi dietro alla tastiera
     function showCustomPrompt(title, placeholder, callback) {
       document.getElementById('dialog-title').innerText = title;
       document.getElementById('dialog-message').innerText = "";
@@ -1069,7 +1070,7 @@
       document.getElementById('dialog-title').innerText = title;
       document.getElementById('dialog-message').innerText = message;
       document.getElementById('dialog-prompt-container').classList.add('hidden');
-      document.getElementById('dialog-cancel-btn').classList.add('hidden'); // Nasconde pulsante annulla per Alert normali
+      document.getElementById('dialog-cancel-btn').classList.add('hidden'); 
       document.getElementById('modal-custom-dialog').classList.remove('hidden');
       dialogCallback = () => {};
     }
@@ -1440,7 +1441,7 @@
           currentSeasonSelection = currentSeasonSelection.filter(s => s !== seasonName);
         } else {
           if (currentSeasonSelection.length >= 2) {
-            currentSeasonSelection.shift(); // Max 2 stagioni contemporaneamente
+            currentSeasonSelection.shift(); 
           }
           currentSeasonSelection.push(seasonName);
         }
@@ -1493,7 +1494,6 @@
       lucide.createIcons();
     }
 
-    // Chiude il modale di aggiunta
     function closeAddModal() {
       document.getElementById('modal-add-garment').classList.add('hidden');
     }

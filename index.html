@@ -324,6 +324,13 @@
 
         <!-- TAB: MY OUTFITS LIST -->
         <div id="subview-outfits" class="space-y-4">
+          <div class="flex justify-between items-center">
+            <h3 class="serif-title text-xs font-bold tracking-wider uppercase text-fashionBlack">I Miei Outfit</h3>
+            <button onclick="openManualOutfitModal()" class="text-[10px] font-bold text-rosegold border border-rosegold px-2.5 py-1.5 rounded hover:bg-rosegold hover:text-white transition-colors flex items-center gap-1">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i> CREA OUTFIT
+            </button>
+          </div>
+
           <div id="outfits-list-container" class="grid grid-cols-1 gap-3">
             <!-- Outfit salvati -->
           </div>
@@ -693,6 +700,107 @@
       </div>
     </div>
 
+    <!-- ================= MODAL: CREATE MANUAL OUTFIT ================= -->
+    <div id="modal-manual-outfit" class="fixed inset-0 bg-black/60 z-50 flex items-end justify-center hidden">
+      <div class="bg-white w-full max-w-md rounded-t-3xl max-h-[90vh] overflow-y-auto p-6 space-y-5 animate-slide-up pb-8">
+        <div class="flex justify-between items-center border-b border-gray-100 pb-3">
+          <h3 class="serif-title text-base font-bold tracking-wider text-fashionBlack uppercase">Crea Outfit Manuale</h3>
+          <button onclick="closeManualOutfitModal()" class="p-1 text-gray-400 hover:text-fashionBlack">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <form id="manual-outfit-form" onsubmit="saveManualOutfit(event)" class="space-y-4">
+          <div class="space-y-1">
+            <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Nome Outfit *</label>
+            <input type="text" id="manual-outfit-name" required placeholder="Es. Outfit Aperitivo Venerdì" class="w-full bg-fashionGray text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rosegold">
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div class="space-y-1">
+              <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Stile *</label>
+              <select id="manual-outfit-style" required class="w-full bg-fashionGray text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rosegold">
+                <option value="Casual">Casual</option>
+                <option value="Elegante">Elegante</option>
+                <option value="Business">Business</option>
+                <option value="Streetwear">Streetwear</option>
+                <option value="Sportivo">Sportivo</option>
+                <option value="Vintage">Vintage</option>
+                <option value="Rock">Rock</option>
+                <option value="Minimal">Minimal</option>
+                <option value="Chic">Chic</option>
+                <option value="Smart Casual">Smart Casual</option>
+                <option value="Boho">Boho</option>
+                <option value="Urban">Urban</option>
+              </select>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Stagione *</label>
+              <select id="manual-outfit-season" required class="w-full bg-fashionGray text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rosegold">
+                <option value="Primavera">Primavera</option>
+                <option value="Estate">Estate</option>
+                <option value="Autunno">Autunno</option>
+                <option value="Inverno">Inverno</option>
+                <option value="Tutto l'anno">Tutto l'anno</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Manual Selection Slots -->
+          <div class="space-y-2">
+            <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Componi l'Outfit (Seleziona i Capi)</label>
+            <div class="space-y-2.5">
+              <!-- Sopra / Vestito -->
+              <div onclick="openManualItemSelector('upper')" class="cursor-pointer border border-dashed border-gray-200 rounded-xl p-3 hover:border-rosegold transition-all" id="manual-slot-upper">
+                <!-- Dinamico -->
+              </div>
+              <!-- Sotto (Nascosto se Abito intero selezionato) -->
+              <div onclick="openManualItemSelector('lower')" class="cursor-pointer border border-dashed border-gray-200 rounded-xl p-3 hover:border-rosegold transition-all" id="manual-slot-lower">
+                <!-- Dinamico -->
+              </div>
+              <!-- Capospalla -->
+              <div onclick="openManualItemSelector('outer')" class="cursor-pointer border border-dashed border-gray-200 rounded-xl p-3 hover:border-rosegold transition-all" id="manual-slot-outer">
+                <!-- Dinamico -->
+              </div>
+              <!-- Scarpe -->
+              <div onclick="openManualItemSelector('shoes')" class="cursor-pointer border border-dashed border-gray-200 rounded-xl p-3 hover:border-rosegold transition-all" id="manual-slot-shoes">
+                <!-- Dinamico -->
+              </div>
+              <!-- Accessorio -->
+              <div onclick="openManualItemSelector('accessory')" class="cursor-pointer border border-dashed border-gray-200 rounded-xl p-3 hover:border-rosegold transition-all" id="manual-slot-accessory">
+                <!-- Dinamico -->
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-3 pt-2">
+            <button type="button" onclick="closeManualOutfitModal()" class="flex-1 py-3 text-center rounded-xl bg-fashionGray text-gray-600 text-xs font-semibold uppercase tracking-wider">
+              Annulla
+            </button>
+            <button type="submit" class="flex-1 py-3 text-center rounded-xl bg-fashionBlack text-white text-xs font-semibold uppercase tracking-wider hover:bg-rosegold transition-colors">
+              Salva Outfit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ================= MODAL: MANUAL ITEM SELECTOR ================= -->
+    <div id="modal-manual-item-selector" class="fixed inset-0 bg-black/60 z-[60] flex items-end justify-center hidden">
+      <div class="bg-white w-full max-w-md rounded-t-3xl max-h-[80vh] overflow-y-auto p-6 space-y-4 animate-slide-up pb-8">
+        <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+          <h3 id="manual-selector-title" class="serif-title text-sm font-bold tracking-wider text-fashionBlack uppercase">Seleziona Capo</h3>
+          <button onclick="closeManualItemSelector()" class="p-1 text-gray-400 hover:text-fashionBlack">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+        
+        <div id="manual-selector-list" class="grid grid-cols-2 gap-2 max-h-[55vh] overflow-y-auto pb-4">
+          <!-- Capi filtrati visualizzati dinamicamente -->
+        </div>
+      </div>
+    </div>
+
     <!-- ================= MODAL: SELECT SAVED OUTFIT FOR CALENDAR ================= -->
     <div id="modal-calendar-outfit-picker" class="fixed inset-0 bg-black/60 z-50 flex items-end justify-center hidden">
       <div class="bg-white w-full max-w-md rounded-t-3xl max-h-[80vh] overflow-y-auto p-6 space-y-4 animate-slide-up pb-8">
@@ -1019,6 +1127,10 @@
     let selectedPilotItem = null;
     let activeSelectorCategory = '';
     
+    // State variables per l'outfit manuale
+    let manualOutfitItems = { upper: null, lower: null, outer: null, shoes: null, accessory: null };
+    let activeManualSlot = '';
+
     let calendarDate = new Date();
     let selectedCalendarDay = null;
 
@@ -1055,13 +1167,13 @@
     }
 
     // Centra l'inquadratura dello schermo quando si aprono i prompt per non far nascondere i campi dietro alla tastiera
-    function showCustomPrompt(title, placeholder, callback) {
+    function showCustomPrompt(title, placeholder, callback, defaultValue = "") {
       document.getElementById('dialog-title').innerText = title;
       document.getElementById('dialog-message').innerText = "";
       document.getElementById('dialog-prompt-container').classList.remove('hidden');
       
       const input = document.getElementById('dialog-prompt-input');
-      input.value = "";
+      input.value = defaultValue;
       input.placeholder = placeholder;
       
       document.getElementById('dialog-cancel-btn').classList.remove('hidden');
@@ -1649,7 +1761,6 @@
       lucide.createIcons();
     }
 
-    // = STREAMING_CHUNK: Definizione funzioni di chiusura e modifica capi...
     function closeDetailModal() {
       document.getElementById('modal-detail-garment').classList.add('hidden');
     }
@@ -1915,9 +2026,14 @@
 
           return `
             <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm flex justify-between items-center gap-3">
-              <div class="overflow-hidden space-y-2">
+              <div class="overflow-hidden space-y-2 flex-1">
                 <div>
-                  <h4 class="text-xs font-bold text-fashionBlack leading-tight truncate">${out.name}</h4>
+                  <div class="flex items-center gap-2 max-w-full">
+                    <h4 class="text-xs font-bold text-fashionBlack leading-tight truncate max-w-[170px]">${out.name}</h4>
+                    <button onclick="openRenameOutfitModal('${out.id}')" class="text-gray-400 hover:text-rosegold transition-colors shrink-0 p-0.5" title="Rinomina">
+                      <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                    </button>
+                  </div>
                   <p class="text-[9px] text-gray-400 uppercase font-bold tracking-wider mt-0.5">${out.style} • ${out.season}</p>
                 </div>
                 <div class="flex flex-wrap gap-1">
@@ -1937,6 +2053,24 @@
         container.innerHTML = '';
         emptyState.classList.remove('hidden');
       }
+    }
+
+    function openRenameOutfitModal(outId) {
+      const out = outfits.find(o => o.id === outId);
+      if (!out) return;
+
+      showCustomPrompt("Rinomina Outfit", "Inserisci il nuovo nome...", (newName) => {
+        if (newName === null) return;
+        const finalName = newName.trim();
+        if (finalName === "") {
+          showToast("Il nome non può essere vuoto");
+          return;
+        }
+        out.name = finalName;
+        StorageManager.saveOutfits(outfits);
+        renderSavedOutfitsList();
+        showToast("Outfit rinominato!");
+      }, out.name);
     }
 
     function deleteOutfit(outId) {
@@ -1965,6 +2099,199 @@
     function changeMonth(dir) {
       calendarDate.setMonth(calendarDate.getMonth() + dir);
       renderCalendar();
+    }
+
+    // ==========================================
+    // UI SUBMODULE: MANUAL OUTFIT BUILDER
+    // ==========================================
+    function openManualOutfitModal() {
+      document.getElementById('manual-outfit-form').reset();
+      manualOutfitItems = { upper: null, lower: null, outer: null, shoes: null, accessory: null };
+      renderManualSlots();
+      document.getElementById('modal-manual-outfit').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeManualOutfitModal() {
+      document.getElementById('modal-manual-outfit').classList.add('hidden');
+    }
+
+    function renderManualSlots() {
+      const slotsConfig = [
+        { id: 'upper', name: 'Sopra / Abito intero', categoryKeys: [...MACRO_SLOTS.UPPER, ...MACRO_SLOTS.FULL] },
+        { id: 'lower', name: 'Sotto (pantaloni, gonna...)', categoryKeys: MACRO_SLOTS.LOWER },
+        { id: 'outer', name: 'Capospalla (giacca, cappotto...)', categoryKeys: MACRO_SLOTS.OUTER },
+        { id: 'shoes', name: 'Scarpe', categoryKeys: MACRO_SLOTS.SHOES },
+        { id: 'accessory', name: 'Accessorio', categoryKeys: MACRO_SLOTS.ACCESSORIES }
+      ];
+
+      // Se Sopra è un Abito intero (category === "Vestiti"), disabilita o nascondi Sotto
+      const isFullDressSelected = manualOutfitItems.upper && MACRO_SLOTS.FULL.includes(manualOutfitItems.upper.category);
+
+      slotsConfig.forEach(slot => {
+        const container = document.getElementById(`manual-slot-${slot.id}`);
+        
+        // Gestione Sotto se Abito intero è selezionato
+        if (slot.id === 'lower' && isFullDressSelected) {
+          manualOutfitItems.lower = null; // Forza nullo
+          container.className = "border border-gray-100 bg-gray-50/50 rounded-xl p-3 pointer-events-none opacity-40 transition-all";
+          container.innerHTML = `
+            <div class="flex items-center gap-3 text-left">
+              <div class="w-10 h-10 rounded-lg bg-gray-200 flex items-center justify-center text-gray-400"><i data-lucide="slash" class="w-5 h-5"></i></div>
+              <div>
+                <span class="text-[8px] uppercase font-bold tracking-wider text-gray-400">Sotto</span>
+                <h4 class="text-xs font-semibold text-gray-400">Non necessario (Abito Intero attivo)</h4>
+              </div>
+            </div>
+          `;
+          return;
+        } else {
+          container.className = "cursor-pointer border border-dashed border-gray-200 rounded-xl p-3 hover:border-rosegold transition-all bg-white shadow-sm";
+        }
+
+        const item = manualOutfitItems[slot.id];
+        if (item) {
+          const imgHTML = item.image 
+            ? `<img src="${item.image}" class="w-10 h-10 rounded-lg object-cover">`
+            : `<div class="w-10 h-10 rounded-lg bg-fashionBeige flex items-center justify-center text-rosegold"><i data-lucide="shirt" class="w-5 h-5"></i></div>`;
+          
+          container.innerHTML = `
+            <div class="flex items-center justify-between w-full">
+              <div class="flex items-center gap-3 text-left overflow-hidden">
+                ${imgHTML}
+                <div class="overflow-hidden">
+                  <span class="text-[8px] uppercase font-bold tracking-wider text-rosegold">${item.category}</span>
+                  <h4 class="text-xs font-bold text-fashionBlack truncate">${item.name}</h4>
+                </div>
+              </div>
+              <button onclick="removeManualItem('${slot.id}', event)" class="p-1.5 text-red-500 hover:bg-red-50 rounded-lg transition-colors shrink-0">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+          `;
+        } else {
+          container.innerHTML = `
+            <div class="flex items-center gap-3 text-left text-gray-400">
+              <div class="w-10 h-10 rounded-lg bg-fashionGray border border-dashed border-gray-200 flex items-center justify-center text-gray-400">
+                <i data-lucide="plus" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <span class="text-[8px] uppercase font-bold tracking-wider text-gray-400">${slot.name}</span>
+                <h4 class="text-xs font-medium text-gray-500">Scegli capo dall'armadio</h4>
+              </div>
+            </div>
+          `;
+        }
+      });
+      lucide.createIcons();
+    }
+
+    function removeManualItem(slotType, event) {
+      event.stopPropagation(); // Evita l'apertura del selettore al clic del cestino
+      manualOutfitItems[slotType] = null;
+      renderManualSlots();
+    }
+
+    function openManualItemSelector(slotType) {
+      activeManualSlot = slotType;
+      let filterCategories = [];
+      let slotLabel = '';
+
+      switch(slotType) {
+        case 'upper':
+          filterCategories = [...MACRO_SLOTS.UPPER, ...MACRO_SLOTS.FULL];
+          slotLabel = 'Sopra / Abito Intero';
+          break;
+        case 'lower':
+          filterCategories = MACRO_SLOTS.LOWER;
+          slotLabel = 'Sotto';
+          break;
+        case 'outer':
+          filterCategories = MACRO_SLOTS.OUTER;
+          slotLabel = 'Capospalla';
+          break;
+        case 'shoes':
+          filterCategories = MACRO_SLOTS.SHOES;
+          slotLabel = 'Scarpe';
+          break;
+        case 'accessory':
+          filterCategories = MACRO_SLOTS.ACCESSORIES;
+          slotLabel = 'Accessorio';
+          break;
+      }
+
+      document.getElementById('manual-selector-title').innerText = `Seleziona: ${slotLabel}`;
+
+      // Filtra i capi dell'armadio che appartengono alle categorie del macro slot
+      const filtered = garments.filter(g => filterCategories.includes(g.category));
+      const listContainer = document.getElementById('manual-selector-list');
+
+      if (filtered.length > 0) {
+        listContainer.innerHTML = filtered.map(item => `
+          <div onclick="selectManualItem('${item.id}')" class="bg-fashionGray p-2.5 rounded-xl border border-gray-200 flex items-center gap-2 cursor-pointer active:scale-95 transition-all text-left">
+            <div class="w-10 h-10 rounded-lg overflow-hidden bg-white shrink-0">
+              ${item.image ? `<img src="${item.image}" class="w-full h-full object-cover">` : `<div class="w-full h-full flex items-center justify-center text-gray-300"><i data-lucide="shirt" class="w-5 h-5"></i></div>`}
+            </div>
+            <div class="overflow-hidden">
+              <p class="text-[8px] uppercase tracking-wider text-rosegold font-bold">${item.category}</p>
+              <h5 class="text-[10px] font-bold text-fashionBlack truncate">${item.name}</h5>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        listContainer.innerHTML = `
+          <div class="col-span-2 text-center py-8 text-xs text-gray-400">
+            Nessun capo registrato in questa macro-categoria.
+          </div>
+        `;
+      }
+
+      document.getElementById('modal-manual-item-selector').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeManualItemSelector() {
+      document.getElementById('modal-manual-item-selector').classList.add('hidden');
+    }
+
+    function selectManualItem(itemId) {
+      const item = garments.find(g => g.id === itemId);
+      if (item) {
+        manualOutfitItems[activeManualSlot] = item;
+        renderManualSlots();
+      }
+      closeManualItemSelector();
+    }
+
+    function saveManualOutfit(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('manual-outfit-name').value.trim();
+      const style = document.getElementById('manual-outfit-style').value;
+      const season = document.getElementById('manual-outfit-season').value;
+
+      // Raccogli tutti gli id non nulli
+      const itemsIds = Object.values(manualOutfitItems).filter(Boolean).map(item => item.id);
+
+      if (itemsIds.length < 2) {
+        showToast("Seleziona almeno 2 capi per salvare l'outfit!");
+        return;
+      }
+
+      const newOutfit = {
+        id: 'outfit_manual_' + Date.now(),
+        name: name || `Outfit Personalizzato`,
+        style: style,
+        season: season,
+        itemsIds: itemsIds
+      };
+
+      outfits.push(newOutfit);
+      StorageManager.saveOutfits(outfits);
+      
+      closeManualOutfitModal();
+      renderSavedOutfitsList();
+      showToast("Outfit personalizzato creato con successo!");
     }
 
     function renderCalendar() {
@@ -2026,7 +2353,7 @@
 
           viewContainer.innerHTML = `
             <div class="flex items-center justify-between gap-3 bg-fashionGray p-3 rounded-xl border border-gray-100">
-              <div class="overflow-hidden">
+              <div class="overflow-hidden flex-1">
                 <h4 class="text-xs font-bold text-fashionBlack leading-tight truncate">${out.name}</h4>
                 <p class="text-[9px] text-gray-400 uppercase font-bold tracking-wider mt-0.5">${out.style}</p>
                 <div class="flex flex-wrap gap-1 mt-1.5">
@@ -2095,7 +2422,6 @@
       showToast("Pianificazione salvata");
     }
 
-    // = STREAMING_CHUNK: Implementazione e formattazione link e note per wishlist...
     // ==========================================
     // UI SUBMODULE: WISHLIST WIDGET
     // ==========================================
@@ -2140,7 +2466,7 @@
         container.innerHTML = wishlist.map(wish => {
           return `
             <div class="bg-white p-3.5 rounded-xl border border-gray-100 flex justify-between items-center gap-3 shadow-sm">
-              <div class="overflow-hidden flex-1">
+              <div class="overflow-hidden flex-1 border-r pr-2 border-gray-50">
                 <span class="text-[8px] uppercase tracking-wider font-bold text-rosegold">${wish.category}</span>
                 <h4 class="text-xs font-semibold text-fashionBlack truncate">${wish.name}</h4>
                 ${wish.price ? `<p class="text-[10px] text-gray-500 font-semibold mt-0.5">${wish.price} €</p>` : ''}

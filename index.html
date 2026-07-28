@@ -107,10 +107,9 @@
 </head>
 <body class="bg-gray-100 flex justify-center items-start min-h-[100dvh]">
 
-  <!-- Main Standalone Mobile Shell (Altezza dinamica con scorrimento nativo per abilitare pull-to-refresh) -->
   <div class="w-full max-w-md bg-[#FAF9F6] flex flex-col relative shadow-2xl border-x border-gray-100 min-h-[100dvh] pb-28">
     
-    <!-- Top Premium Header (Sticky per rimanere sempre in alto durante lo scorrimento nativo) -->
+    <!-- Top Header -->
     <header class="glass-effect sticky top-0 z-40 border-b border-gray-100 px-6 py-4 flex justify-between items-center">
       <div>
         <h1 class="serif-title text-2xl font-bold tracking-widest text-fashionBlack flex items-center gap-1">
@@ -119,7 +118,6 @@
         <p class="text-[10px] uppercase tracking-widest text-gray-400 font-medium">Assistant Guardaroba Digitale</p>
       </div>
       <div class="flex items-center gap-3">
-        <!-- Quick Stats Toggle -->
         <button id="header-stats-btn" onclick="switchView('dashboard')" class="text-fashionBlack hover:text-rosegold transition-colors">
           <i data-lucide="sparkles" class="w-5 h-5"></i>
         </button>
@@ -129,10 +127,9 @@
       </div>
     </header>
 
-    <!-- Main Dynamic Content Container (Scorre nativamente con il body) -->
+    <!-- Main Container -->
     <main id="app-container" class="flex-1 px-4 py-4">
       
-      <!-- ================= VIEW 1: DASHBOARD ================= -->
       <section id="view-dashboard" class="view-transition space-y-6">
         <!-- Banner Intro -->
         <div class="bg-fashionBlack text-white p-5 rounded-2xl relative overflow-hidden">
@@ -144,7 +141,7 @@
           <p class="text-xs text-gray-300 mt-2 font-light">Crea abbinamenti cromatici avanzati, tieni traccia dei tuoi capi e pianifica l'outfit perfetto.</p>
         </div>
 
-        <!-- Quick Numerical Stats Grid -->
+        <!-- Quick Stats Grid -->
         <div class="grid grid-cols-3 gap-3">
           <div class="bg-white p-3 rounded-xl border border-gray-100 text-center shadow-sm">
             <p id="stat-total" class="text-2xl font-bold text-fashionBlack serif-title">0</p>
@@ -176,12 +173,11 @@
           </button>
         </div>
 
-        <!-- Aesthetic Charts / Analytics Section -->
+        <!-- Analytics Section -->
         <div class="space-y-4">
           <h3 class="serif-title text-xs font-bold tracking-wider uppercase text-fashionBlack">Statistiche di Stile</h3>
           
           <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm space-y-4">
-            <!-- Categorie Predominanti -->
             <div>
               <p class="text-[10px] uppercase font-semibold text-gray-400 tracking-wider mb-2">Categorie Più Utilizzate</p>
               <div id="chart-categories" class="space-y-2">
@@ -189,7 +185,6 @@
               </div>
             </div>
 
-            <!-- Stili Predominanti -->
             <div>
               <p class="text-[10px] uppercase font-semibold text-gray-400 tracking-wider mb-2">Stili Predominanti</p>
               <div id="chart-styles" class="space-y-2">
@@ -197,7 +192,6 @@
               </div>
             </div>
 
-            <!-- Colori Predominanti -->
             <div>
               <p class="text-[10px] uppercase font-semibold text-gray-400 tracking-wider mb-2">Colori Predominanti (Principali e Secondari)</p>
               <div id="chart-colors" class="flex flex-wrap gap-2">
@@ -208,16 +202,13 @@
         </div>
       </section>
 
-      <!-- ================= VIEW 2: GUARDAROBA (CATALOG) ================= -->
       <section id="view-wardrobe" class="view-transition space-y-4 hidden">
-        <!-- Search & Quick Filters -->
         <div class="space-y-2">
           <div class="relative">
             <input type="text" id="wardrobe-search" placeholder="Cerca nell'armadio..." class="w-full bg-white text-fashionBlack placeholder-gray-400 text-xs rounded-xl pl-10 pr-4 py-3 border border-gray-100 focus:outline-none focus:border-rosegold shadow-sm transition-all">
             <i data-lucide="search" class="absolute left-3 top-3.5 w-4 h-4 text-gray-400"></i>
           </div>
           
-          <!-- Slider di chips per filtri veloci -->
           <div class="flex overflow-x-auto gap-2 pb-1 scrollbar-none">
             <select id="filter-category" onchange="applyFilters()" class="bg-white text-xs border border-gray-100 rounded-lg px-3 py-1.5 focus:outline-none text-gray-600 shrink-0">
               <option value="">Tutte le Categorie</option>
@@ -234,12 +225,8 @@
           </div>
         </div>
 
-        <!-- Content Grid -->
-        <div id="wardrobe-grid" class="grid grid-cols-2 gap-3">
-          <!-- Capi renderizzati dinamicamente -->
-        </div>
+        <div id="wardrobe-grid" class="grid grid-cols-2 gap-3"></div>
 
-        <!-- Empty State Guardaroba -->
         <div id="wardrobe-empty" class="text-center py-12 space-y-3 hidden">
           <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-fashionGray text-gray-400">
             <i data-lucide="folder-open" class="w-6 h-6"></i>
@@ -249,14 +236,12 @@
         </div>
       </section>
 
-      <!-- ================= VIEW 3: OUTFIT BUILDER ================= -->
       <section id="view-builder" class="view-transition space-y-4 hidden">
         <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm space-y-4">
           <h3 class="serif-title text-sm font-bold tracking-wider text-fashionBlack uppercase text-center border-b border-gray-100 pb-2">
             Motore di Suggerimento
           </h3>
 
-          <!-- Capo di partenza -->
           <div class="space-y-2">
             <label class="text-[10px] tracking-wider uppercase text-gray-400 font-bold">1. Capo Di Partenza (Selezionato)</label>
             <div id="builder-selected-item" onclick="openGarmentSelector()" class="border border-dashed border-gray-200 rounded-xl p-4 flex items-center justify-center gap-3 cursor-pointer hover:border-rosegold transition-colors">
@@ -265,7 +250,6 @@
             </div>
           </div>
 
-          <!-- Filtri e parametri dell'abbinamento -->
           <div class="grid grid-cols-2 gap-3">
             <div class="space-y-1">
               <label class="text-[9px] tracking-wider uppercase text-gray-400 font-bold">Stile Ricercato</label>
@@ -298,21 +282,15 @@
             </div>
           </div>
 
-          <!-- Generatore Button -->
           <button onclick="generateOutfits()" class="w-full text-center py-3 bg-fashionBlack text-white rounded-xl text-xs font-semibold uppercase tracking-widest hover:bg-rosegold transition-colors flex items-center justify-center gap-2">
             <i data-lucide="wand2" class="w-4 h-4"></i> Elabora Abbinamento
           </button>
         </div>
 
-        <!-- Risultati Suggestions -->
-        <div id="builder-results" class="space-y-4">
-          <!-- Risultati generati dinamicamente -->
-        </div>
+        <div id="builder-results" class="space-y-4"></div>
       </section>
 
-      <!-- ================= VIEW 4: I MIEI OUTFIT & CALENDARIO ================= -->
       <section id="view-calendar" class="view-transition space-y-4 hidden">
-        <!-- Sub-navigation: I Miei Outfit / Calendario -->
         <div class="flex border-b border-gray-100">
           <button id="subtab-outfits" onclick="switchSubTab('outfits')" class="flex-1 text-center py-2.5 text-xs font-bold tracking-wider uppercase border-b-2 border-rosegold text-rosegold">
             I Miei Outfit
@@ -322,7 +300,7 @@
           </button>
         </div>
 
-        <!-- TAB: MY OUTFITS LIST -->
+        <!-- TAB: OUTFITS -->
         <div id="subview-outfits" class="space-y-4">
           <div class="flex justify-between items-center">
             <h3 class="serif-title text-xs font-bold tracking-wider uppercase text-fashionBlack">I Miei Outfit</h3>
@@ -331,25 +309,21 @@
             </button>
           </div>
 
-          <div id="outfits-list-container" class="grid grid-cols-1 gap-3">
-            <!-- Outfit salvati -->
-          </div>
+          <div id="outfits-list-container" class="grid grid-cols-1 gap-3"></div>
           <div id="outfits-empty" class="text-center py-12 space-y-2">
             <i data-lucide="heart" class="w-8 h-8 text-gray-300 mx-auto"></i>
             <p class="text-xs text-gray-500 font-light">Nessun outfit preferito salvato.</p>
           </div>
         </div>
 
-        <!-- TAB: CALENDAR SCHEDULE -->
+        <!-- TAB: CALENDAR -->
         <div id="subview-calendar" class="space-y-4 hidden">
-          <!-- Calendar Selector Month Header -->
           <div class="flex justify-between items-center bg-white p-3 rounded-xl border border-gray-100 shadow-sm">
             <button onclick="changeMonth(-1)" class="p-1 hover:text-rosegold"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
             <h3 id="calendar-month-year" class="serif-title text-sm font-semibold tracking-wider text-fashionBlack">Mese Anno</h3>
             <button onclick="changeMonth(1)" class="p-1 hover:text-rosegold"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
           </div>
 
-          <!-- Calendar Grid Table -->
           <div class="bg-white p-3 rounded-xl border border-gray-100 shadow-sm">
             <div class="grid grid-cols-7 gap-1 text-center mb-2">
               <span class="text-[9px] font-bold text-gray-400 uppercase">Lu</span>
@@ -360,27 +334,20 @@
               <span class="text-[9px] font-bold text-gray-400 uppercase">Sa</span>
               <span class="text-[9px] font-bold text-gray-400 uppercase">Do</span>
             </div>
-            <div id="calendar-days" class="grid grid-cols-7 gap-1.5">
-              <!-- Giorni generati dinamicamente -->
-            </div>
+            <div id="calendar-days" class="grid grid-cols-7 gap-1.5"></div>
           </div>
 
-          <!-- Detail Panel Day Outfit -->
           <div id="calendar-day-detail" class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm space-y-3 hidden">
             <div class="flex justify-between items-center border-b border-gray-100 pb-2">
               <span id="selected-date-label" class="text-xs font-semibold text-fashionBlack">Outfit del Giorno</span>
               <button onclick="removeCalendarOutfit()" class="text-red-500 text-[10px] uppercase font-bold tracking-wider hover:underline">Rimuovi</button>
             </div>
-            <div id="selected-date-outfit-view" class="space-y-2">
-              <!-- Outfit salvato per questo giorno -->
-            </div>
+            <div id="selected-date-outfit-view" class="space-y-2"></div>
           </div>
         </div>
       </section>
 
-      <!-- ================= VIEW 5: WISHLIST & BACKUP ================= -->
       <section id="view-more" class="view-transition space-y-5 hidden">
-        <!-- Wishlist Section -->
         <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm space-y-4">
           <div class="flex justify-between items-center border-b border-gray-100 pb-2">
             <h3 class="serif-title text-sm font-bold tracking-wider uppercase text-fashionBlack flex items-center gap-2">
@@ -390,15 +357,12 @@
               + AGGIUNGI
             </button>
           </div>
-          <div id="wishlist-container" class="space-y-2">
-            <!-- Items wishlist -->
-          </div>
+          <div id="wishlist-container" class="space-y-2"></div>
           <div id="wishlist-empty" class="text-center py-6 text-xs text-gray-400 font-light">
             La tua lista dei desideri è vuota.
           </div>
         </div>
 
-        <!-- Custom Categories Management -->
         <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm space-y-3">
           <h3 class="serif-title text-xs font-bold tracking-wider uppercase text-fashionBlack border-b border-gray-100 pb-2">
             Gestisci Categorie Personalizzate
@@ -409,12 +373,9 @@
               Aggiungi
             </button>
           </div>
-          <div id="custom-categories-list" class="flex flex-wrap gap-1.5 pt-2">
-            <!-- Chip categorie personalizzate con x per eliminarle -->
-          </div>
+          <div id="custom-categories-list" class="flex flex-wrap gap-1.5 pt-2"></div>
         </div>
 
-        <!-- Backup Data Section -->
         <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm space-y-3">
           <h3 class="serif-title text-xs font-bold tracking-wider uppercase text-fashionBlack border-b border-gray-100 pb-2">
             Backup &amp; Ripristino dati
@@ -434,7 +395,6 @@
 
     </main>
 
-    <!-- Navigation Bottom Bar (Fissata al fondo dello schermo intero e compatibile con Safe Areas di iOS/Android) -->
     <nav class="glass-effect fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md z-40 border-t border-gray-100 px-1 pt-1.5 pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))] grid grid-cols-5 items-center justify-items-center shadow-lg">
       <button onclick="switchView('dashboard')" id="nav-dashboard" class="flex flex-col items-center justify-center text-rosegold transition-colors py-1 w-full min-w-0">
         <i data-lucide="layout-dashboard" class="w-5 h-5 nav-icon"></i>
@@ -445,7 +405,6 @@
         <span class="text-[8px] uppercase tracking-wider font-semibold mt-1 truncate w-full text-center nav-text">Armadio</span>
       </button>
       
-      <!-- Center Column for Floating Action Button -->
       <div class="relative flex items-center justify-center w-full h-10">
         <button onclick="openAddModal()" class="w-11 h-11 rounded-full bg-fashionBlack hover:bg-rosegold text-white flex items-center justify-center shadow-lg absolute -top-5 transform hover:scale-105 transition-all fab-shadow shrink-0 nav-fab-btn">
           <i data-lucide="plus" class="w-5 h-5"></i>
@@ -462,7 +421,6 @@
       </button>
     </nav>
 
-    <!-- ================= MODAL: ADD / EDIT GARMENT ================= -->
     <div id="modal-add-garment" class="fixed inset-0 bg-black/60 z-50 flex items-end justify-center hidden">
       <div class="bg-white w-full max-w-md rounded-t-3xl max-h-[90vh] overflow-y-auto p-6 space-y-5 animate-slide-up pb-8">
         <div class="flex justify-between items-center border-b border-gray-100 pb-3">
@@ -475,7 +433,6 @@
         <form id="garment-form" onsubmit="saveGarment(event)" class="space-y-4">
           <input type="hidden" id="form-garment-id">
           
-          <!-- Image Upload with Double Input Support (Camera & Gallery) -->
           <div class="space-y-2">
             <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Foto del capo</label>
             <div class="flex items-center gap-4">
@@ -484,7 +441,6 @@
                 <img id="image-preview" class="w-full h-full object-cover hidden" alt="Preview Capo">
               </div>
               <div class="flex-1 space-y-2">
-                <!-- Sezione a due pulsanti per Fotocamera e Galleria separati -->
                 <div class="grid grid-cols-2 gap-2">
                   <label class="block text-center border border-gray-200 hover:border-rosegold rounded-xl py-2 px-2 text-[11px] font-semibold cursor-pointer transition-colors flex items-center justify-center gap-1.5 bg-white shadow-sm">
                     <i data-lucide="image" class="w-3.5 h-3.5 text-gray-500"></i>
@@ -502,21 +458,16 @@
             </div>
           </div>
 
-          <!-- Nome Capo -->
           <div class="space-y-1">
             <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Nome Capo *</label>
             <input type="text" id="form-name" required placeholder="Es. Jeans Skinny Blu" class="w-full bg-fashionGray text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rosegold">
           </div>
 
-          <!-- Categoria -->
           <div class="space-y-1">
             <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Categoria *</label>
-            <select id="form-category" required class="w-full bg-fashionGray text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rosegold">
-              <!-- Renderizzato dinamicamente -->
-            </select>
+            <select id="form-category" required class="w-full bg-fashionGray text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rosegold"></select>
           </div>
 
-          <!-- Colore Principale e Colore Secondario -->
           <div class="grid grid-cols-2 gap-3">
             <div class="space-y-1">
               <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Colore Principale *</label>
@@ -530,12 +481,14 @@
                 <option value="Jeans">Jeans</option>
                 <option value="Verde">Verde</option>
                 <option value="Rosso">Rosso</option>
+                <option value="Bordeaux">Bordeaux</option>
                 <option value="Rosa">Rosa</option>
                 <option value="Fucsia">Fucsia</option>
                 <option value="Viola">Viola</option>
                 <option value="Giallo">Giallo</option>
                 <option value="Ocra">Ocra</option>
                 <option value="Arancione">Arancione</option>
+                <option value="Multicolor">Multicolor</option>
                 <option value="Oro">Oro</option>
                 <option value="Argento">Argento</option>
               </select>
@@ -553,35 +506,30 @@
                 <option value="Jeans">Jeans</option>
                 <option value="Verde">Verde</option>
                 <option value="Rosso">Rosso</option>
+                <option value="Bordeaux">Bordeaux</option>
                 <option value="Rosa">Rosa</option>
                 <option value="Fucsia">Fucsia</option>
                 <option value="Viola">Viola</option>
                 <option value="Giallo">Giallo</option>
                 <option value="Ocra">Ocra</option>
                 <option value="Arancione">Arancione</option>
+                <option value="Multicolor">Multicolor</option>
                 <option value="Oro">Oro</option>
                 <option value="Argento">Argento</option>
               </select>
             </div>
           </div>
 
-          <!-- Stagioni (Selezione Multipla Fino a 2 o "Tutto l'anno") -->
           <div class="space-y-1">
             <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Stagione (Seleziona fino a 2 o 'Tutto l'anno') *</label>
-            <div id="form-season-chips" class="flex flex-wrap gap-1.5 pt-1">
-              <!-- Chips stagioni renderizzate dinamicamente -->
-            </div>
+            <div id="form-season-chips" class="flex flex-wrap gap-1.5 pt-1"></div>
           </div>
 
-          <!-- Stile (Scelta Multipla a Chips) -->
           <div class="space-y-1">
             <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Stile (Seleziona uno o più)</label>
-            <div id="form-style-chips" class="flex flex-wrap gap-1.5 pt-1">
-              <!-- Chips di stile renderizzate dinamicamente -->
-            </div>
+            <div id="form-style-chips" class="flex flex-wrap gap-1.5 pt-1"></div>
           </div>
 
-          <!-- Campi Aggiuntivi: Marca, Materiale, Taglia, Modello -->
           <div class="grid grid-cols-2 gap-3">
             <div class="space-y-1">
               <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Marca</label>
@@ -601,13 +549,11 @@
             </div>
           </div>
 
-          <!-- Note e Descrizione -->
           <div class="space-y-1">
             <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Descrizione &amp; Note</label>
             <textarea id="form-notes" placeholder="Note extra, abbinamenti preferiti..." rows="2" class="w-full bg-fashionGray text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rosegold"></textarea>
           </div>
 
-          <!-- Submit Buttons -->
           <div class="flex gap-3 pt-2">
             <button type="button" onclick="closeAddModal()" class="flex-1 py-3 text-center rounded-xl bg-fashionGray text-gray-600 text-xs font-semibold uppercase tracking-wider">
               Annulla
@@ -620,7 +566,7 @@
       </div>
     </div>
 
-    <!-- ================= MODAL: DETAIL CARD (SHEET COMPLETA) ================= -->
+    <!-- DETAIL MODAL -->
     <div id="modal-detail-garment" class="fixed inset-0 bg-black/60 z-50 flex items-end justify-center hidden">
       <div class="bg-white w-full max-w-md rounded-t-3xl max-h-[85vh] overflow-y-auto p-6 space-y-4 animate-slide-up pb-8">
         <div class="flex justify-between items-center border-b border-gray-100 pb-2">
@@ -629,14 +575,11 @@
             <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
-
-        <div id="detail-card-content" class="space-y-4">
-          <!-- Popolato dinamicamente da UI manager -->
-        </div>
+        <div id="detail-card-content" class="space-y-4"></div>
       </div>
     </div>
 
-    <!-- ================= MODAL: GARMENT SELECTOR FOR BUILDER ================= -->
+    <!-- GARMENT SELECTOR MODAL -->
     <div id="modal-selector-garment" class="fixed inset-0 bg-black/60 z-50 flex items-end justify-center hidden">
       <div class="bg-white w-full max-w-md rounded-t-3xl max-h-[80vh] overflow-y-auto p-6 space-y-4 animate-slide-up pb-8">
         <div class="flex justify-between items-center border-b border-gray-100 pb-2">
@@ -645,21 +588,14 @@
             <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
-
-        <!-- Selettore rapido categoria -->
         <div class="flex gap-2 overflow-x-auto pb-1">
           <button onclick="filterSelectorList('')" id="selector-cat-all" class="bg-fashionBlack text-white text-[10px] uppercase font-bold tracking-wider px-3 py-1.5 rounded-lg shrink-0">Tutti</button>
-          <!-- Categorie inserite dinamicamente -->
         </div>
-
-        <!-- List of Garments suitable for builder selection -->
-        <div id="selector-garments-list" class="grid grid-cols-2 gap-2 max-h-[50vh] overflow-y-auto">
-          <!-- Capi visualizzati dinamicamente -->
-        </div>
+        <div id="selector-garments-list" class="grid grid-cols-2 gap-2 max-h-[50vh] overflow-y-auto"></div>
       </div>
     </div>
 
-    <!-- ================= MODAL: WISHLIST ADD / EDIT ================= -->
+    <!-- WISHLIST MODAL -->
     <div id="modal-add-wishlist" class="fixed inset-0 bg-black/60 z-50 flex items-end justify-center hidden">
       <div class="bg-white w-full max-w-md rounded-t-3xl p-6 space-y-4 animate-slide-up pb-8">
         <div class="flex justify-between items-center border-b border-gray-100 pb-2">
@@ -668,11 +604,8 @@
             <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
-
         <form id="wishlist-form" onsubmit="saveWishlistItem(event)" class="space-y-4">
-          <!-- ID nascosto per identificare la modalità Edit -->
           <input type="hidden" id="form-wish-id">
-          
           <div class="space-y-1">
             <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Cosa desideri acquistare?</label>
             <input type="text" id="wish-name" required placeholder="Es. Blazer in Lino beige" class="w-full bg-fashionGray text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rosegold">
@@ -680,9 +613,7 @@
           <div class="grid grid-cols-2 gap-3">
             <div class="space-y-1">
               <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Categoria *</label>
-              <select id="wish-category" required class="w-full bg-fashionGray text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rosegold">
-                <!-- Categorie -->
-              </select>
+              <select id="wish-category" required class="w-full bg-fashionGray text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rosegold"></select>
             </div>
             <div class="space-y-1">
               <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Prezzo Stimato (€)</label>
@@ -700,7 +631,7 @@
       </div>
     </div>
 
-    <!-- ================= MODAL: CREATE MANUAL OUTFIT ================= -->
+    <!-- MANUAL OUTFIT MODAL -->
     <div id="modal-manual-outfit" class="fixed inset-0 bg-black/60 z-50 flex items-end justify-center hidden">
       <div class="bg-white w-full max-w-md rounded-t-3xl max-h-[90vh] overflow-y-auto p-6 space-y-5 animate-slide-up pb-8">
         <div class="flex justify-between items-center border-b border-gray-100 pb-3">
@@ -709,13 +640,11 @@
             <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
-
         <form id="manual-outfit-form" onsubmit="saveManualOutfit(event)" class="space-y-4">
           <div class="space-y-1">
             <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Nome Outfit *</label>
             <input type="text" id="manual-outfit-name" required placeholder="Es. Outfit Aperitivo Venerdì" class="w-full bg-fashionGray text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rosegold">
           </div>
-
           <div class="grid grid-cols-2 gap-3">
             <div class="space-y-1">
               <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Stile *</label>
@@ -745,34 +674,16 @@
               </select>
             </div>
           </div>
-
-          <!-- Manual Selection Slots -->
           <div class="space-y-2">
             <label class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Componi l'Outfit (Seleziona i Capi)</label>
             <div class="space-y-2.5">
-              <!-- Sopra / Vestito -->
-              <div onclick="openManualItemSelector('upper')" class="cursor-pointer border border-dashed border-gray-200 rounded-xl p-3 hover:border-rosegold transition-all" id="manual-slot-upper">
-                <!-- Dinamico -->
-              </div>
-              <!-- Sotto (Nascosto se Abito intero selezionato) -->
-              <div onclick="openManualItemSelector('lower')" class="cursor-pointer border border-dashed border-gray-200 rounded-xl p-3 hover:border-rosegold transition-all" id="manual-slot-lower">
-                <!-- Dinamico -->
-              </div>
-              <!-- Capospalla -->
-              <div onclick="openManualItemSelector('outer')" class="cursor-pointer border border-dashed border-gray-200 rounded-xl p-3 hover:border-rosegold transition-all" id="manual-slot-outer">
-                <!-- Dinamico -->
-              </div>
-              <!-- Scarpe -->
-              <div onclick="openManualItemSelector('shoes')" class="cursor-pointer border border-dashed border-gray-200 rounded-xl p-3 hover:border-rosegold transition-all" id="manual-slot-shoes">
-                <!-- Dinamico -->
-              </div>
-              <!-- Accessorio -->
-              <div onclick="openManualItemSelector('accessory')" class="cursor-pointer border border-dashed border-gray-200 rounded-xl p-3 hover:border-rosegold transition-all" id="manual-slot-accessory">
-                <!-- Dinamico -->
-              </div>
+              <div onclick="openManualItemSelector('upper')" class="cursor-pointer border border-dashed border-gray-200 rounded-xl p-3 hover:border-rosegold transition-all" id="manual-slot-upper"></div>
+              <div onclick="openManualItemSelector('lower')" class="cursor-pointer border border-dashed border-gray-200 rounded-xl p-3 hover:border-rosegold transition-all" id="manual-slot-lower"></div>
+              <div onclick="openManualItemSelector('outer')" class="cursor-pointer border border-dashed border-gray-200 rounded-xl p-3 hover:border-rosegold transition-all" id="manual-slot-outer"></div>
+              <div onclick="openManualItemSelector('shoes')" class="cursor-pointer border border-dashed border-gray-200 rounded-xl p-3 hover:border-rosegold transition-all" id="manual-slot-shoes"></div>
+              <div onclick="openManualItemSelector('accessory')" class="cursor-pointer border border-dashed border-gray-200 rounded-xl p-3 hover:border-rosegold transition-all" id="manual-slot-accessory"></div>
             </div>
           </div>
-
           <div class="flex gap-3 pt-2">
             <button type="button" onclick="closeManualOutfitModal()" class="flex-1 py-3 text-center rounded-xl bg-fashionGray text-gray-600 text-xs font-semibold uppercase tracking-wider">
               Annulla
@@ -785,7 +696,7 @@
       </div>
     </div>
 
-    <!-- ================= MODAL: MANUAL ITEM SELECTOR ================= -->
+    <!-- MANUAL ITEM SELECTOR -->
     <div id="modal-manual-item-selector" class="fixed inset-0 bg-black/60 z-[60] flex items-end justify-center hidden">
       <div class="bg-white w-full max-w-md rounded-t-3xl max-h-[80vh] overflow-y-auto p-6 space-y-4 animate-slide-up pb-8">
         <div class="flex justify-between items-center border-b border-gray-100 pb-2">
@@ -794,14 +705,11 @@
             <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
-        
-        <div id="manual-selector-list" class="grid grid-cols-2 gap-2 max-h-[55vh] overflow-y-auto pb-4">
-          <!-- Capi filtrati visualizzati dinamicamente -->
-        </div>
+        <div id="manual-selector-list" class="grid grid-cols-2 gap-2 max-h-[55vh] overflow-y-auto pb-4"></div>
       </div>
     </div>
 
-    <!-- ================= MODAL: SELECT SAVED OUTFIT FOR CALENDAR ================= -->
+    <!-- CALENDAR OUTFIT PICKER MODAL -->
     <div id="modal-calendar-outfit-picker" class="fixed inset-0 bg-black/60 z-50 flex items-end justify-center hidden">
       <div class="bg-white w-full max-w-md rounded-t-3xl max-h-[80vh] overflow-y-auto p-6 space-y-4 animate-slide-up pb-8">
         <div class="flex justify-between items-center border-b border-gray-100 pb-2">
@@ -811,19 +719,16 @@
           </button>
         </div>
         <p class="text-[10px] text-gray-400 tracking-wider uppercase">Seleziona uno dei tuoi outfit registrati:</p>
-        <div id="calendar-picker-list" class="space-y-2">
-          <!-- Lista outfit salvati da selezionare -->
-        </div>
+        <div id="calendar-picker-list" class="space-y-2"></div>
       </div>
     </div>
 
-    <!-- ================= MODAL: CUSTOM DIALOG (Alert/Confirm/Prompt) ================= -->
+    <!-- CUSTOM DIALOG MODAL -->
     <div id="modal-custom-dialog" class="fixed inset-0 bg-black/60 z-[100] flex items-center justify-center p-4 hidden">
       <div class="bg-white w-full max-w-sm rounded-2xl p-5 space-y-4 animate-slide-up shadow-2xl">
         <h4 id="dialog-title" class="serif-title text-sm font-bold tracking-wider text-fashionBlack uppercase">Conferma</h4>
         <p id="dialog-message" class="text-xs text-gray-500 font-light leading-relaxed"></p>
         
-        <!-- Prompt Input Wrapper -->
         <div id="dialog-prompt-container" class="hidden">
           <input type="text" id="dialog-prompt-input" class="w-full bg-fashionGray text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rosegold">
         </div>
@@ -839,18 +744,14 @@
       </div>
     </div>
 
-    <!-- Custom In-App Notification Toast (Premium Alternative to alert) -->
+    <!-- Toast Notification -->
     <div id="app-toast" class="fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-fashionBlack text-white text-xs px-5 py-3 rounded-full shadow-2xl tracking-wide opacity-0 transition-opacity duration-300 pointer-events-none z-50 text-center font-medium">
       Notifica
     </div>
 
   </div>
 
-  <!-- JavaScript Logic Modules -->
   <script>
-    // ==========================================
-    // MODULE: DATA & DEFINITIONS (data.js)
-    // ==========================================
     const DEFAULT_CATEGORIES = [
       "Jeans", "Pantaloni", "Shorts", "Gonne", "Vestiti", 
       "T-shirt", "Polo", "Camicie", "Felpe", "Maglioni", 
@@ -868,7 +769,6 @@
       "Primavera", "Estate", "Autunno", "Inverno", "Tutto l'anno"
     ];
 
-    // Mappatura compatibilità degli stili
     const STYLE_COMPATIBILITY = {
       'Casual': ['Casual', 'Streetwear', 'Sportivo', 'Vintage', 'Minimal', 'Smart Casual', 'Boho', 'Urban'],
       'Elegante': ['Elegante', 'Business', 'Chic', 'Smart Casual', 'Minimal'],
@@ -884,7 +784,6 @@
       'Urban': ['Urban', 'Streetwear', 'Casual', 'Sportivo', 'Rock']
     };
 
-    // Raggruppamento strutturale delle categorie in macroaree
     const MACRO_SLOTS = {
       'UPPER': ["T-shirt", "Polo", "Camicie", "Felpe", "Maglioni", "Cardigan"],
       'LOWER': ["Jeans", "Pantaloni", "Shorts", "Gonne"],
@@ -894,9 +793,6 @@
       'ACCESSORIES': ["Borse", "Cinture", "Cappelli", "Accessori"]
     };
 
-    // ==========================================
-    // MODULE: STORAGE MANAGER (storage.js)
-    // ==========================================
     const StorageManager = {
       get(key, defaultValue) {
         try {
@@ -917,7 +813,6 @@
       },
       getGarments() { 
         const list = this.get('garments', []); 
-        // Conversione/migrazione retrocompatibile per le stagioni multiple e colore secondario
         return list.map(g => {
           if (!g.seasons) {
             g.seasons = g.season ? [g.season] : ["Tutto l'anno"];
@@ -939,9 +834,6 @@
       saveWishlist(w) { this.set('wishlist', w); }
     };
 
-    // ==========================================
-    // MODULE: LOCAL OUTFIT ENGINE (outfitEngine.js)
-    // ==========================================
     const OutfitEngine = {
       getMacroSlot(category) {
         for (const [slot, cats] of Object.entries(MACRO_SLOTS)) {
@@ -950,12 +842,12 @@
         return 'ACCESSORIES';
       },
 
-      // Nuove regole cromatiche avanzate (Tono su Tono, Complementari, Neutri)
-      NEUTRALS: ['Bianco', 'Nero', 'Grigio', 'Beige', 'Blu', 'Jeans', 'Oro', 'Argento'],
+      NEUTRALS: ['Bianco', 'Nero', 'Grigio', 'Beige', 'Blu', 'Jeans', 'Oro', 'Argento', 'Multicolor'],
 
       COMPLEMENTARY: {
         'Rosso': ['Verde'],
-        'Verde': ['Rosso'],
+        'Bordeaux': ['Verde', 'Beige', 'Rosa'],
+        'Verde': ['Rosso', 'Bordeaux'],
         'Blu': ['Arancione'],
         'Jeans': ['Arancione'],
         'Arancione': ['Blu', 'Jeans'],
@@ -966,29 +858,19 @@
 
       TONO_SU_TONO_FAMILIES: [
         ['Blu', 'Jeans'],
-        ['Rosa', 'Fucsia'],
+        ['Rosso', 'Bordeaux', 'Rosa', 'Fucsia'],
         ['Beige', 'Marrone', 'Ocra'],
         ['Nero', 'Grigio', 'Bianco']
       ],
 
       getColorHarmonyScore(c1, c2) {
         if (!c1 || !c2 || c1 === 'Nessuno' || c2 === 'Nessuno') return 0;
-        
-        // 1. Tono su Tono - Colore identico
         if (c1 === c2) return 15;
-        
-        // 2. Tono su Tono - Sfumature appartenenti alla stessa famiglia
         for (const family of this.TONO_SU_TONO_FAMILIES) {
           if (family.includes(c1) && family.includes(c2)) return 12;
         }
-        
-        // 3. Contrasti Complementari
         if (this.COMPLEMENTARY[c1] && this.COMPLEMENTARY[c1].includes(c2)) return 12;
-        
-        // 4. Colori Neutri (Abbinabili a piacimento como jolly di guardaroba)
         if (this.NEUTRALS.includes(c1) || this.NEUTRALS.includes(c2)) return 10;
-        
-        // Nessun abbinamento armonioso (clashing di colori)
         return 0;
       },
 
@@ -1008,44 +890,32 @@
         candidates.forEach(item => {
           const slot = this.getMacroSlot(item.category);
           if (slots[slot]) {
-            // 1. FILTRO DI STILE RESTRITTIVO
-            if (isStrictStyle && !item.styles.includes(styleConstraint)) {
-              return; 
-            }
+            if (isStrictStyle && !item.styles.includes(styleConstraint)) return; 
 
-            // 2. FILTRO DI ARMONIA CROMATICA AVANZATA (Principale + Secondario)
             const pMain = pilotItem.mainColor;
             const pSec = pilotItem.secondaryColor || 'Nessuno';
             const iMain = item.mainColor;
             const iSec = item.secondaryColor || 'Nessuno';
 
-            // Calcolo combinazioni incrociate
             const scoreMainMain = this.getColorHarmonyScore(pMain, iMain);
             const scoreMainSec = this.getColorHarmonyScore(pMain, iSec);
             const scoreSecMain = this.getColorHarmonyScore(pSec, iMain);
             const scoreSecSec = this.getColorHarmonyScore(pSec, iSec);
 
-            // Ottieni il valore cromatico massimo calibrato
             const maxColorScore = Math.max(
               scoreMainMain,
-              scoreMainSec * 0.7, // Calibrazione coefficiente secondario
+              scoreMainSec * 0.7,
               scoreSecMain * 0.7, 
               scoreSecSec * 0.5   
             );
 
-            // Esclusione categorica se l'abbinamento non rispetta alcun criterio di armonia cromatica
-            if (maxColorScore === 0) {
-              return; 
-            }
+            if (maxColorScore === 0) return; 
 
             let score = 0;
-            
-            // Compatibilità di stile per rilevanza ordinamento
             const compatibleStyles = STYLE_COMPATIBILITY[styleConstraint] || [];
             const itemMatchesStyle = item.styles.some(st => compatibleStyles.includes(st));
             if (itemMatchesStyle) score += 15;
 
-            // Compatibilità di stagione
             const itemSeasons = item.seasons || [item.season || "Tutto l'anno"];
             const matchesSeasonConstraint = 
               seasonConstraint === "Tutto l'anno" || 
@@ -1053,11 +923,7 @@
               itemSeasons.includes(seasonConstraint) ||
               pilotSeasons.some(ps => itemSeasons.includes(ps));
 
-            if (matchesSeasonConstraint) {
-              score += 10;
-            }
-
-            // Somma il punteggio di armocromia calcolato
+            if (matchesSeasonConstraint) score += 10;
             score += maxColorScore;
             
             item._score = score;
@@ -1070,7 +936,6 @@
         }
 
         const outcomes = [];
-
         for (let step = 0; step < 3; step++) {
           const proposal = {
             id: 'prop_' + Date.now() + '_' + step,
@@ -1112,9 +977,6 @@
       }
     };
 
-    // ==========================================
-    // MODULE: UI & STATE MANAGEMENT
-    // ==========================================
     let currentView = 'dashboard';
     let currentSubTab = 'outfits';
     let garments = [];
@@ -1127,14 +989,11 @@
     let selectedPilotItem = null;
     let activeSelectorCategory = '';
     
-    // State variables per l'outfit manuale
     let manualOutfitItems = { upper: null, lower: null, outer: null, shoes: null, accessory: null };
     let activeManualSlot = '';
 
     let calendarDate = new Date();
     let selectedCalendarDay = null;
-
-    // Custom Callback Holder for custom modals (Zero Browser Alerts system)
     let dialogCallback = null;
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -1154,9 +1013,6 @@
       lucide.createIcons();
     });
 
-    // ==========================================
-    // PREMIUM MODALS SYSTEM (ALERT / CONFIRM / PROMPT)
-    // ==========================================
     function showCustomConfirm(message, callback) {
       document.getElementById('dialog-title').innerText = "Conferma";
       document.getElementById('dialog-message').innerText = message;
@@ -1166,7 +1022,6 @@
       dialogCallback = callback;
     }
 
-    // Centra l'inquadratura dello schermo quando si aprono i prompt per non far nascondere i campi dietro alla tastiera
     function showCustomPrompt(title, placeholder, callback, defaultValue = "") {
       document.getElementById('dialog-title').innerText = title;
       document.getElementById('dialog-message').innerText = "";
@@ -1179,15 +1034,6 @@
       document.getElementById('dialog-cancel-btn').classList.remove('hidden');
       document.getElementById('modal-custom-dialog').classList.remove('hidden');
       dialogCallback = callback;
-    }
-
-    function showCustomAlert(title, message) {
-      document.getElementById('dialog-title').innerText = title;
-      document.getElementById('dialog-message').innerText = message;
-      document.getElementById('dialog-prompt-container').classList.add('hidden');
-      document.getElementById('dialog-cancel-btn').classList.add('hidden'); 
-      document.getElementById('modal-custom-dialog').classList.remove('hidden');
-      dialogCallback = () => {};
     }
 
     function closeCustomDialog(confirmed) {
@@ -1294,7 +1140,6 @@
         dailyTipContainer.innerHTML = "Aggiungi almeno un capo per ricevere suggerimenti automatici dal motore d'abbinamento.";
       }
 
-      // Categorie più utilizzate
       const catCount = {};
       garments.forEach(g => catCount[g.category] = (catCount[g.category] || 0) + 1);
       const sortedCats = Object.entries(catCount).sort((a,b) => b[1] - a[1]).slice(0, 3);
@@ -1319,7 +1164,6 @@
         chartCats.innerHTML = `<p class="text-xs text-gray-400 italic">Ancora nessun capo registrato.</p>`;
       }
 
-      // Stili predominanti
       const styleCount = {};
       garments.forEach(g => {
         g.styles.forEach(st => styleCount[st] = (styleCount[st] || 0) + 1);
@@ -1346,12 +1190,11 @@
         chartStyles.innerHTML = `<p class="text-xs text-gray-400 italic">Ancora nessun dato.</p>`;
       }
 
-      // Colori predominanti (Inclusi i secondari)
       const colorCount = {};
       garments.forEach(g => {
         colorCount[g.mainColor] = (colorCount[g.mainColor] || 0) + 1;
         if (g.secondaryColor && g.secondaryColor !== 'Nessuno') {
-          colorCount[g.secondaryColor] = (colorCount[g.secondaryColor] || 0) + 0.5; // Peso minore per colore secondario
+          colorCount[g.secondaryColor] = (colorCount[g.secondaryColor] || 0) + 0.5;
         }
       });
       const sortedColors = Object.entries(colorCount).sort((a,b) => b[1] - a[1]);
@@ -1362,7 +1205,7 @@
           const bgCol = getColorHex(col);
           const textColor = (col === 'Bianco' || col === 'Giallo' || col === 'Beige') ? 'text-black border border-gray-200' : 'text-white';
           return `
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold ${textColor}" style="background-color: ${bgCol}">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold ${textColor}" style="background: ${bgCol}">
               ${col} (${Math.round(count)})
             </span>
           `;
@@ -1376,16 +1219,16 @@
       const colors = {
         'Bianco': '#FFFFFF', 'Nero': '#1A1A1A', 'Grigio': '#8E8E93',
         'Beige': '#F3E5D8', 'Marrone': '#7A5230', 'Blu': '#004080',
-        'Rosso': '#D92121', 'Verde': '#2E7D32', 'Rosa': '#FFC0CB',
+        'Rosso': '#D92121', 'Bordeaux': '#800020', 'Verde': '#2E7D32', 'Rosa': '#FFC0CB',
         'Giallo': '#FFEB3B', 'Jeans': '#5A7D9A',
         'Fucsia': '#FF007F', 'Viola': '#800080', 'Ocra': '#DAA520', 'Arancione': '#FF9800',
+        'Multicolor': 'linear-gradient(135deg, #EF4444, #F59E0B, #10B981, #3B82F6, #8B5CF6)',
         'Oro': '#D4AF37', 'Argento': '#C0C0C0',
         'Nessuno': 'transparent'
       };
       return colors[colorName] || '#E5E5E5';
     }
 
-    // Inizializzazione categorie nei form
     function initFormCategories() {
       const select = document.getElementById('form-category');
       const wishSelect = document.getElementById('wish-category');
@@ -1394,7 +1237,6 @@
       wishSelect.innerHTML = catsHTML;
     }
 
-    // Inizializzazione filtri dropdown
     function initFilterDropdowns() {
       const filterCat = document.getElementById('filter-category');
       filterCat.innerHTML = `<option value="">Tutte le Categorie</option>` + categories.map(cat => `<option value="${cat}">${cat}</option>`).join('');
@@ -1403,7 +1245,7 @@
       filterStyle.innerHTML = `<option value="">Tutti gli Stili</option>` + STYLES.map(st => `<option value="${st}">${st}</option>`).join('');
       
       const filterColor = document.getElementById('filter-color');
-      const colors = ["Nero", "Grigio", "Bianco", "Beige", "Marrone", "Blu", "Jeans", "Verde", "Rosso", "Rosa", "Fucsia", "Viola", "Giallo", "Ocra", "Arancione", "Oro", "Argento"];
+      const colors = ["Nero", "Grigio", "Bianco", "Beige", "Marrone", "Blu", "Jeans", "Verde", "Rosso", "Bordeaux", "Rosa", "Fucsia", "Viola", "Giallo", "Ocra", "Arancione", "Multicolor", "Oro", "Argento"];
       filterColor.innerHTML = `<option value="">Tutti i Colori</option>` + colors.map(col => `<option value="${col}">${col}</option>`).join('');
       
       const filterSeason = document.getElementById('filter-season');
@@ -1426,13 +1268,11 @@
         const matchesCat = selCat ? item.category === selCat : true;
         const matchesStyle = selStyle ? item.styles.includes(selStyle) : true;
         
-        // Verifica con stagioni multiple
         const itemSeasons = item.seasons || [item.season || "Tutto l'anno"];
         const matchesSeason = selSeason 
           ? (itemSeasons.includes(selSeason) || itemSeasons.includes("Tutto l'anno")) 
           : true;
 
-        // Verifica colore principale o secondario
         const matchesColor = selColor 
           ? (item.mainColor === selColor || item.secondaryColor === selColor) 
           : true;
@@ -1469,8 +1309,8 @@
                 </div>
                 <div class="flex justify-between items-center mt-2 pt-2 border-t border-gray-50">
                   <div class="flex gap-1">
-                    <span class="inline-block w-3.5 h-3.5 rounded-full border border-gray-300" style="background-color: ${getColorHex(item.mainColor)}" title="Principale: ${item.mainColor}"></span>
-                    ${hasSecColor ? `<span class="inline-block w-3.5 h-3.5 rounded-full border border-gray-300" style="background-color: ${getColorHex(item.secondaryColor)}" title="Secondario: ${item.secondaryColor}"></span>` : ''}
+                    <span class="inline-block w-3.5 h-3.5 rounded-full border border-gray-300" style="background: ${getColorHex(item.mainColor)}" title="Principale: ${item.mainColor}"></span>
+                    ${hasSecColor ? `<span class="inline-block w-3.5 h-3.5 rounded-full border border-gray-300" style="background: ${getColorHex(item.secondaryColor)}" title="Secondario: ${item.secondaryColor}"></span>` : ''}
                   </div>
                   <span class="text-[9px] text-gray-400 font-light truncate max-w-[80px]">${item.brand || 'No Brand'}</span>
                 </div>
@@ -1493,9 +1333,6 @@
       renderWardrobe();
     });
 
-    // ==========================================
-    // UI SUBMODULE: IMAGE PROCESSING & CROP
-    // ==========================================
     function previewAndCompressImage(event) {
       const file = event.target.files[0];
       if (!file) return;
@@ -1528,9 +1365,6 @@
       reader.readAsDataURL(file);
     }
 
-    // ==========================================
-    // UI SUBMODULE: STAGIONI & STILE CHIPS
-    // ==========================================
     function renderSeasonChips() {
       const container = document.getElementById('form-season-chips');
       container.innerHTML = SEASONS.map(s => {
@@ -1539,7 +1373,7 @@
           ? "bg-rosegold text-white border-rosegold" 
           : "bg-fashionGray text-gray-500 border-gray-200";
         return `
-          <button type="button" onclick="toggleSeasonForm('${s}')" class="text-[10px] font-medium px-2.5 py-1 rounded-full border transition-all ${css}">
+          <button type="button" onclick="toggleSeasonForm(this.getAttribute('data-season'))" data-season="${s}" class="text-[10px] font-medium px-2.5 py-1 rounded-full border transition-all ${css}">
             ${s}
           </button>
         `;
@@ -1548,7 +1382,11 @@
 
     function toggleSeasonForm(seasonName) {
       if (seasonName === "Tutto l'anno") {
-        currentSeasonSelection = ["Tutto l'anno"];
+        if (currentSeasonSelection.includes("Tutto l'anno")) {
+          currentSeasonSelection = [];
+        } else {
+          currentSeasonSelection = ["Tutto l'anno"];
+        }
       } else {
         currentSeasonSelection = currentSeasonSelection.filter(s => s !== "Tutto l'anno");
         
@@ -1564,9 +1402,6 @@
       renderSeasonChips();
     }
 
-    // ==========================================
-    // UI SUBMODULE: ADD / EDIT DIALOG
-    // ==========================================
     function renderStyleChips() {
       const container = document.getElementById('form-style-chips');
       container.innerHTML = STYLES.map(st => {
@@ -1575,7 +1410,7 @@
           ? "bg-rosegold text-white border-rosegold" 
           : "bg-fashionGray text-gray-500 border-gray-200";
         return `
-          <button type="button" onclick="toggleStyleForm('${st}')" class="text-[10px] font-medium px-2.5 py-1 rounded-full border transition-all ${css}">
+          <button type="button" onclick="toggleStyleForm(this.getAttribute('data-style'))" data-style="${st}" class="text-[10px] font-medium px-2.5 py-1 rounded-full border transition-all ${css}">
             ${st}
           </button>
         `;
@@ -1664,9 +1499,6 @@
       updateDashboardStats();
     }
 
-    // ==========================================
-    // UI SUBMODULE: DETAIL SHEETS
-    // ==========================================
     function openDetailModal(id) {
       const item = garments.find(g => g.id === id);
       if (!item) return;
@@ -1700,7 +1532,7 @@
             <div>
               <p class="text-[9px] uppercase tracking-wider text-gray-400 font-bold">Colore Principale</p>
               <p class="font-medium mt-0.5 flex items-center gap-1.5 font-semibold">
-                <span class="inline-block w-3 h-3 rounded-full border border-gray-300 shadow-sm" style="background-color: ${getColorHex(item.mainColor)}"></span>
+                <span class="inline-block w-3 h-3 rounded-full border border-gray-300 shadow-sm" style="background: ${getColorHex(item.mainColor)}"></span>
                 ${item.mainColor}
               </p>
             </div>
@@ -1708,7 +1540,7 @@
               <p class="text-[9px] uppercase tracking-wider text-gray-400 font-bold">Colore Secondario</p>
               <p class="font-medium mt-0.5 flex items-center gap-1.5">
                 ${hasSecColor ? `
-                  <span class="inline-block w-3 h-3 rounded-full border border-gray-300 shadow-sm" style="background-color: ${getColorHex(item.secondaryColor)}"></span>
+                  <span class="inline-block w-3 h-3 rounded-full border border-gray-300 shadow-sm" style="background: ${getColorHex(item.secondaryColor)}"></span>
                   ${item.secondaryColor}
                 ` : '<span class="text-gray-400 italic">Nessuno</span>'}
               </p>
@@ -1745,7 +1577,6 @@
             </div>
           ` : ''}
 
-          <!-- Bottoni di gestione -->
           <div class="flex gap-3 pt-2">
             <button onclick="deleteGarment('${item.id}')" class="flex-1 py-3 bg-red-50 hover:bg-red-100 text-red-500 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors">
               Elimina
@@ -1816,9 +1647,6 @@
       lucide.createIcons();
     }
 
-    // ==========================================
-    // UI SUBMODULE: OUTFIT BUILDER WIDGET
-    // ==========================================
     function openGarmentSelector() {
       const catSelectorHeader = document.getElementById('modal-selector-garment').querySelector('.flex.gap-2');
       catSelectorHeader.innerHTML = `
@@ -1826,7 +1654,7 @@
           Tutti
         </button>
       ` + categories.map(cat => `
-        <button onclick="filterSelectorList('${cat}')" id="selector-cat-${cat.replace(/\s+/g, '')}" class="text-[10px] uppercase font-bold tracking-wider px-3 py-1.5 rounded-lg border border-gray-200 text-gray-500 shrink-0">
+        <button onclick="filterSelectorList(this.getAttribute('data-cat'))" data-cat="${cat}" id="selector-cat-${cat.replace(/\s+/g, '')}" class="text-[10px] uppercase font-bold tracking-wider px-3 py-1.5 rounded-lg border border-gray-200 text-gray-500 shrink-0">
           ${cat}
         </button>
       `).join('');
@@ -2006,9 +1834,6 @@
       });
     }
 
-    // ==========================================
-    // UI SUBMODULE: SAVED OUTFITS & CALENDAR
-    // ==========================================
     function renderSavedOutfitsList() {
       const container = document.getElementById('outfits-list-container');
       const emptyState = document.getElementById('outfits-empty');
@@ -2090,7 +1915,6 @@
       });
     }
 
-    // --- CALENDAR GRID ---
     const MONTH_NAMES = [
       "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
       "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
@@ -2101,9 +1925,6 @@
       renderCalendar();
     }
 
-    // ==========================================
-    // UI SUBMODULE: MANUAL OUTFIT BUILDER
-    // ==========================================
     function openManualOutfitModal() {
       document.getElementById('manual-outfit-form').reset();
       manualOutfitItems = { upper: null, lower: null, outer: null, shoes: null, accessory: null };
@@ -2125,15 +1946,13 @@
         { id: 'accessory', name: 'Accessorio', categoryKeys: MACRO_SLOTS.ACCESSORIES }
       ];
 
-      // Se Sopra è un Abito intero (category === "Vestiti"), disabilita o nascondi Sotto
       const isFullDressSelected = manualOutfitItems.upper && MACRO_SLOTS.FULL.includes(manualOutfitItems.upper.category);
 
       slotsConfig.forEach(slot => {
         const container = document.getElementById(`manual-slot-${slot.id}`);
         
-        // Gestione Sotto se Abito intero è selezionato
         if (slot.id === 'lower' && isFullDressSelected) {
-          manualOutfitItems.lower = null; // Forza nullo
+          manualOutfitItems.lower = null;
           container.className = "border border-gray-100 bg-gray-50/50 rounded-xl p-3 pointer-events-none opacity-40 transition-all";
           container.innerHTML = `
             <div class="flex items-center gap-3 text-left">
@@ -2187,7 +2006,7 @@
     }
 
     function removeManualItem(slotType, event) {
-      event.stopPropagation(); // Evita l'apertura del selettore al clic del cestino
+      event.stopPropagation();
       manualOutfitItems[slotType] = null;
       renderManualSlots();
     }
@@ -2222,7 +2041,6 @@
 
       document.getElementById('manual-selector-title').innerText = `Seleziona: ${slotLabel}`;
 
-      // Filtra i capi dell'armadio che appartengono alle categorie del macro slot
       const filtered = garments.filter(g => filterCategories.includes(g.category));
       const listContainer = document.getElementById('manual-selector-list');
 
@@ -2270,7 +2088,6 @@
       const style = document.getElementById('manual-outfit-style').value;
       const season = document.getElementById('manual-outfit-season').value;
 
-      // Raccogli tutti gli id non nulli
       const itemsIds = Object.values(manualOutfitItems).filter(Boolean).map(item => item.id);
 
       if (itemsIds.length < 2) {
@@ -2422,13 +2239,9 @@
       showToast("Pianificazione salvata");
     }
 
-    // ==========================================
-    // UI SUBMODULE: WISHLIST WIDGET
-    // ==========================================
     function formatWishlistNotes(notes) {
       if (!notes) return '';
       
-      // Espressione regolare per identificare URL (http, https o www.)
       const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+)/g;
       const match = notes.match(urlRegex);
       
@@ -2437,7 +2250,6 @@
         let linksHTML = '';
         
         match.forEach(url => {
-          // Pulizia del testo rimuovendo l'URL crudo
           cleanNotes = cleanNotes.replace(url, '').trim();
           let href = url;
           if (url.startsWith('www.')) {
@@ -2475,15 +2287,12 @@
                 </div>
               </div>
               <div class="flex items-center gap-1.5 shrink-0">
-                <!-- Bottone di Modifica / Matita -->
                 <button onclick="editWishlistItem('${wish.id}')" title="Modifica desiderio" class="bg-white p-2 rounded-lg text-fashionBlack hover:bg-gray-50 shadow-sm transition-colors border border-gray-200">
                   <i data-lucide="pencil" class="w-4 h-4"></i>
                 </button>
-                <!-- Bottone di Spostamento in Armadio -->
                 <button onclick="promoteWishToArmadio('${wish.id}')" title="Sposta nell'armadio" class="bg-white p-2 rounded-lg text-green-600 hover:bg-green-50 shadow-sm transition-colors border border-gray-200">
                   <i data-lucide="check" class="w-4 h-4"></i>
                 </button>
-                <!-- Bottone di Eliminazione -->
                 <button onclick="deleteWishlistItem('${wish.id}')" title="Elimina" class="bg-white p-2 rounded-lg text-red-500 hover:bg-red-50 shadow-sm transition-colors border border-gray-200">
                   <i data-lucide="trash" class="w-4 h-4"></i>
                 </button>
@@ -2534,14 +2343,12 @@
       const notes = document.getElementById('wish-notes').value;
 
       if (id) {
-        // Modalità di Modifica
         const index = wishlist.findIndex(w => w.id === id);
         if (index !== -1) {
           wishlist[index] = { id, name, category, price, notes };
           showToast("Desiderio aggiornato!");
         }
       } else {
-        // Modalità di Creazione
         const item = {
           id: 'wish_' + Date.now(),
           name, category, price, notes
@@ -2598,9 +2405,6 @@
       showToast("Capo trasferito nel guardaroba reale!");
     }
 
-    // ==========================================
-    // UI SUBMODULE: CUSTOM CATEGORIES
-    // ==========================================
     function renderCustomCategories() {
       const container = document.getElementById('custom-categories-list');
       container.innerHTML = categories.map(cat => {
@@ -2608,7 +2412,7 @@
         return `
           <span class="inline-flex items-center gap-1 bg-fashionGray text-fashionBlack text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full border border-gray-100">
             ${cat}
-            ${!isDefault ? `<button onclick="deleteCustomCategory('${cat}')" class="text-red-500 hover:text-red-700 ml-1 font-bold text-xs">×</button>` : ''}
+            ${!isDefault ? `<button onclick="deleteCustomCategory(this.getAttribute('data-cat'))" data-cat="${cat}" class="text-red-500 hover:text-red-700 ml-1 font-bold text-xs">×</button>` : ''}
           </span>
         `;
       }).join('');
@@ -2648,9 +2452,6 @@
       });
     }
 
-    // ==========================================
-    // MODULE: BACKUP MANAGEMENT (JSON)
-    // ==========================================
     function exportData() {
       const data = {
         garments: StorageManager.getGarments(),
